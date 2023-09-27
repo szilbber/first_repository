@@ -15,7 +15,6 @@ class Node {
 
 public class LinkedListTabulatedFunction implements AbstractTabulatedFunction{
     private Node head;
-
     private void addNode(double x, double y) {
         Node newNode = new Node(x, y);
         if (head == null) {
@@ -28,10 +27,42 @@ public class LinkedListTabulatedFunction implements AbstractTabulatedFunction{
             head.prev = newNode;
             newNode.prev = last;
             newNode.next = head;
-            count ++;
 
         }
+        count++;
     }
+    LinkedListTabulatedFunction(double[] xValues, double[] yValues){
+        for(int i = 0; i<xValues.length; i++){
+            for(int j = 0; j<yValues.length; j++){
+                addNode(xValues[i],yValues[j]);
+            }
+        }
+    }
+
+    LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count){
+        if(xFrom > xTo){
+            double temp = xTo;
+            xTo = xFrom;
+            xFrom = temp;
+        }
+
+        head.x = xFrom;
+        head.prev.x = xTo;
+        double step = (xFrom + xTo)/(count - 1);
+        double xCordinate = xFrom;
+
+        if(xFrom == xTo){
+            for(int i = 0; i < count; i++) {
+                addNode(xFrom, source.apply(xFrom));
+            }
+        }else{
+            for(int i = 0; i < count; i++) {
+                addNode(xFrom, source.apply(xFrom));
+                xCordinate += step;
+            }
+        }
+    }
+
 
     protected int floorIndexOfX(double x) {
         return 0;
@@ -52,9 +83,9 @@ public class LinkedListTabulatedFunction implements AbstractTabulatedFunction{
         return 0;
     }
 
-    @Override
+    //Получение количества табулированных значений
     public int getCount() {
-        return 0;
+        return count;
     }
 
     @Override
@@ -82,13 +113,13 @@ public class LinkedListTabulatedFunction implements AbstractTabulatedFunction{
         return 0;
     }
 
-    @Override
+    //Возвращает самый левый х
     public double leftBound() {
-        return 0;
+        return head.x;
     }
 
-    @Override
+    //Возвращает самый правый х
     public double rightBound() {
-        return 0;
+        return head.prev.x;
     }
 }
