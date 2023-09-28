@@ -15,6 +15,12 @@ class Node {
 
 public class LinkedListTabulatedFunction implements AbstractTabulatedFunction{
     private Node head;
+    private Node getNode(int index){
+        //int index_temp = 0;
+        Node i = head;
+        for(int index_temp = 0; index_temp!=index; i = i.next, index_temp++){}
+        return i;
+    }
     private void addNode(double x, double y) {
         Node newNode = new Node(x, y);
         if (head == null) {
@@ -65,20 +71,40 @@ public class LinkedListTabulatedFunction implements AbstractTabulatedFunction{
 
 
     protected int floorIndexOfX(double x) {
-        return 0;
+        int index_maxX = 0;
+        int index_temp = 0;
+        double maxX = head.x;
+        boolean allXbigger = true;
+        boolean allXsmaller = true;
+        for(Node i = head; i!=head.prev; i = i.next, index_temp++) {
+            if((i.x < x) && (i.x >= maxX)) {
+                maxX = i.x;
+                index_maxX = index_temp;
+                allXbigger = false;
+                allXsmaller = false;
+            }
+            if(i.x>x){
+                allXsmaller = false;
+            }
+            if(i.x>x){
+                allXbigger = false;
+            }
+        }
+        if(allXsmaller) index_maxX = count;
+        if(allXbigger) index_maxX = 0;
+        return index_maxX;
     }
 
-    @Override
     protected double extrapolateLeft(double x) {
         return 0;
     }
 
-    @Override
+
     protected double extrapolateRight(double x) {
         return 0;
     }
 
-    @Override
+
     protected double interpolate(double x, int floorIndex) {
         return 0;
     }
@@ -88,29 +114,53 @@ public class LinkedListTabulatedFunction implements AbstractTabulatedFunction{
         return count;
     }
 
-    @Override
+
     public double getX(int index) {
-        return 0;
+        return getNode(index).x;
     }
 
-    @Override
+
     public double getY(int index) {
-        return 0;
+        return getNode(index).y;
     }
 
-    @Override
+
     public void SetY(int index, double value) {
-
+        getNode(index).y = value;
     }
 
-    @Override
+
     public int indexOfX(double x) {
-        return 0;
+        int index = 0;
+        boolean flag = true;
+        for(Node i = head; i!=head.prev; i = i.next){
+            if(i.x == x) {flag = false; break;}
+            else index++;
+        }
+        if(flag) index = -1;
+        return index;
+//        int index = -1;
+//        for(Node i = head; i!=head.prev; i = i.next) {
+//            if (i.x == x) {
+//                if (index == -1){
+//                    index = 0;
+//                    break;
+//                }
+//                break;
+//            } else index++;
+//        }
+        //return index;
     }
 
-    @Override
     public int indexOfY(double y) {
-        return 0;
+        int index = 0;
+        boolean flag = true;
+        for(Node i = head; i!=head.prev; i = i.next){
+            if(i.y == y) {flag = false; break;}
+            else index++;
+        }
+        if(flag) index = -1;
+        return index;
     }
 
     //Возвращает самый левый х
