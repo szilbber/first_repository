@@ -13,7 +13,7 @@ class Node {
 
 }
 
-public class LinkedListTabulatedFunction implements AbstractTabulatedFunction{
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     private Node head;
     private Node getNode(int index){
         //int index_temp = 0;
@@ -96,17 +96,29 @@ public class LinkedListTabulatedFunction implements AbstractTabulatedFunction{
     }
 
     protected double extrapolateLeft(double x) {
-        return 0;
+        double leftY = getY(0);
+        double leftX = getX(0);
+        double rightY = getY(1);
+        double rightX = getX(1);
+        return interpolate(x,leftX, rightX, leftY, rightY);
     }
 
 
     protected double extrapolateRight(double x) {
-        return 0;
+        double leftY = head.prev.prev.y;
+        double leftX = head.prev.prev.x;
+        double rightY = head.prev.y;
+        double rightX = rightBound();
+        return interpolate(x,leftX, rightX, leftY, rightY);
     }
 
 
     protected double interpolate(double x, int floorIndex) {
-        return 0;
+        double leftY = getY(floorIndex);
+        double leftX = getX(floorIndex);
+        double rightY = getY(floorIndex+2);
+        double rightX = getX(floorIndex+2);
+        return interpolate(x, leftX, rightX, leftY, rightY);
     }
 
     //Получение количества табулированных значений
@@ -139,17 +151,6 @@ public class LinkedListTabulatedFunction implements AbstractTabulatedFunction{
         }
         if(flag) index = -1;
         return index;
-//        int index = -1;
-//        for(Node i = head; i!=head.prev; i = i.next) {
-//            if (i.x == x) {
-//                if (index == -1){
-//                    index = 0;
-//                    break;
-//                }
-//                break;
-//            } else index++;
-//        }
-        //return index;
     }
 
     public int indexOfY(double y) {
