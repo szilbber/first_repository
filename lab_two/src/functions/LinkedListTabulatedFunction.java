@@ -143,8 +143,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         } else {
             double leftY = getY(floorIndex);
             double leftX = getX(floorIndex);
-            double rightY = getY(floorIndex + 2);
-            double rightX = getX(floorIndex + 2);
+            double rightY = getY(floorIndex+1);
+            double rightX = getX(floorIndex+1);
             return interpolate(x, leftX, rightX, leftY, rightY);
         }
     }

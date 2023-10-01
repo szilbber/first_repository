@@ -21,32 +21,43 @@ public class LinkedListTabulatedFunctionTest {
         double x4 = List.floorIndexOfX(4);
         Assertions.assertEquals(2, x4);
     }
-//    @Test
-//    public void extrapolateLeft(){
-//    }
-//    @Test
-//    public void extrapolateRight(){
-//    }
-//    @Test
-//    public void interpolate(){
-//    }
-//
-//    @Test
-//    public void getCount(){
-//
-//    }
-//    @Test
-//    public double getX(int index) {
-//    }
-//
-//    @Test
-//    public double getY(int index) {
-//
-//    }
-//
-//    @Test
-//    public void SetY(int index, double value) {
-//    }
+    @Test
+    public void extrapolateLeft(){
+        double test = List.extrapolateLeft(-1);
+        Assertions.assertEquals(3, test);
+    }
+    @Test
+    public void extrapolateRight(){
+        double test = List.extrapolateLeft(5);
+        Assertions.assertEquals(9, test);
+    }
+    @Test
+    public void interpolate(){
+        double test = List.interpolate(2, 0);
+        Assertions.assertEquals(6, test);
+    }
+
+    @Test
+    public void getCount(){
+        int x = List.getCount();
+        Assertions.assertEquals(4, x);
+    }
+    @Test
+    public void getX() {
+        double x = List.getX(1);
+        Assertions.assertEquals(2, x);
+    }
+
+    @Test
+    public void getY() {
+        double y = List.getY(1);
+        Assertions.assertEquals(6, y);
+    }
+    @Test
+    public void SetY() {
+        List.SetY(3, 9);
+        Assertions.assertEquals(9, List.getY(3));
+    }
     @Test
     public void indexOfX(){
         int index = List.indexOfX(4);
