@@ -14,7 +14,7 @@ public class LinkedListTabulatedFunctionTest {
     @Test
     public void floorIndexOfX(){
         double x = List.floorIndexOfX(3);
-        Assertions.assertEquals(1, x);
+        Assertions.assertEquals(2, x);
         double x1 = List.floorIndexOfX(5);
         Assertions.assertEquals(4, x1);
         double x2 = List.floorIndexOfX(-1);
@@ -22,7 +22,7 @@ public class LinkedListTabulatedFunctionTest {
         double x3 = List.floorIndexOfX(3.5);
         Assertions.assertEquals(2, x3);
         double x4 = List.floorIndexOfX(4);
-        Assertions.assertEquals(2, x4);
+        Assertions.assertEquals(3, x4);
     }
     @Test
     public void extrapolateLeft(){
@@ -91,7 +91,7 @@ public class LinkedListTabulatedFunctionTest {
     @Test
     public void floorNodeOfX(){
         Node test = List.floorNodeOfX(3);
-        Assertions.assertEquals(2, test.x);
+        Assertions.assertEquals(3, test.x);
 
         Node x1 = List.floorNodeOfX(5);
         Assertions.assertEquals(4, x1.x);
@@ -103,7 +103,7 @@ public class LinkedListTabulatedFunctionTest {
         Assertions.assertEquals(3, x3.x);
 
         Node x4 = List.floorNodeOfX(4);
-        Assertions.assertEquals(3, x4.x);
+        Assertions.assertEquals(4, x4.x);
     }
     @Test
     public void apply(){

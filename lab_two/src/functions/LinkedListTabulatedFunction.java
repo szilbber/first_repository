@@ -74,15 +74,19 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         int index_floor = 0;
         boolean allXsmaller = true;
         Node temp = head;
-        for (int index_temp = 0; index_temp != count; index_temp++) {
+        for (int index_temp = 0; index_temp != count; ++index_temp) {
             if (temp.x < x) {
                 temp = temp.next;
-            } else if (temp.x >= x) {
+            } else if (temp.x > x) {
                 allXsmaller = false;
                 index_floor = index_temp - 1;
                 if (index_temp == 0) {
                     index_floor = 0;
                 }
+                break;
+            } else{
+                allXsmaller = false;
+                index_floor = index_temp;
                 break;
             }
         }
@@ -218,12 +222,16 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         for (int index_temp = 0; index_temp != count; index_temp++) {
             if (temp.x < x) {
                 temp = temp.next;
-            } else if (temp.x >= x) {
+            } else if (temp.x > x) {
                 allXsmaller = false;
                 floorNode = temp.prev;
                 if (index_temp == 0) {
                     floorNode = head;
                 }
+                break;
+            }else if(temp.x == x){
+                allXsmaller = false;
+                floorNode = temp;
                 break;
             }
         }
