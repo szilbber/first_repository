@@ -70,7 +70,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         }
     }
 
-
     protected int floorIndexOfX(double x) {
         int index_floor = 0;
         boolean allXsmaller = true;
@@ -210,5 +209,41 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     //Возвращает самый правый х
     public double rightBound() {
         return head.prev.x;
+    }
+
+    protected Node floorNodeOfX(double x){
+        Node floorNode = head;
+        boolean allXsmaller = true;
+        Node temp = head;
+        for (int index_temp = 0; index_temp != count; index_temp++) {
+            if (temp.x < x) {
+                temp = temp.next;
+            } else if (temp.x >= x) {
+                allXsmaller = false;
+                floorNode = temp.prev;
+                if (index_temp == 0) {
+                    floorNode = head;
+                }
+                break;
+            }
+        }
+        if (allXsmaller) floorNode = head.prev;
+        return floorNode;
+    }
+    public double apply(double x) {
+        if (x < leftBound())
+            return extrapolateLeft(x);
+        else if (x > rightBound())
+            return extrapolateRight(x);
+        else {
+            int searchIndexOfX = indexOfX(x);
+
+            if (searchIndexOfX != -1)
+                return getY(searchIndexOfX);
+            else {
+                Node i = floorNodeOfX(x);
+                return interpolate(x, i.x, i.next.x, i.y, i.next.y);
+            }
+        }
     }
 }

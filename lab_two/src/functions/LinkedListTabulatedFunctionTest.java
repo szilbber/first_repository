@@ -8,6 +8,9 @@ public class LinkedListTabulatedFunctionTest {
     double[] xVal = {1,2,3,4};
     double[] yVal = {5,6,7,8};
     LinkedListTabulatedFunction List = new LinkedListTabulatedFunction(xVal,yVal);
+    double[] x_one = {3};
+    double[] y_one = {4};
+    LinkedListTabulatedFunction List_one = new LinkedListTabulatedFunction(x_one,y_one);
     @Test
     public void floorIndexOfX(){
         double x = List.floorIndexOfX(3);
@@ -25,16 +28,22 @@ public class LinkedListTabulatedFunctionTest {
     public void extrapolateLeft(){
         double test = List.extrapolateLeft(-1);
         Assertions.assertEquals(3, test);
+        double test1 = List_one.interpolate(3, 0);
+        Assertions.assertEquals(3, test1);
     }
     @Test
     public void extrapolateRight(){
         double test = List.extrapolateLeft(5);
         Assertions.assertEquals(9, test);
+        double test1 = List_one.interpolate(3, 0);
+        Assertions.assertEquals(3, test1);
     }
     @Test
     public void interpolate(){
         double test = List.interpolate(2, 0);
         Assertions.assertEquals(6, test);
+        double test1 = List_one.interpolate(3, 0);
+        Assertions.assertEquals(3, test1);
     }
 
     @Test
@@ -79,4 +88,31 @@ public class LinkedListTabulatedFunctionTest {
         double x = List.rightBound();
         Assertions.assertEquals(4, x);
     }
+    @Test
+    public void floorNodeOfX(){
+        Node test = List.floorNodeOfX(3);
+        Assertions.assertEquals(2, test.x);
+
+        Node x1 = List.floorNodeOfX(5);
+        Assertions.assertEquals(4, x1.x);
+
+        Node x2 = List.floorNodeOfX(-1);
+        Assertions.assertEquals(1, x2.x);
+
+        Node x3 = List.floorNodeOfX(3.5);
+        Assertions.assertEquals(3, x3.x);
+
+        Node x4 = List.floorNodeOfX(4);
+        Assertions.assertEquals(3, x4.x);
+    }
+    @Test
+    public void apply(){
+        double test = List.apply(-1);
+        Assertions.assertEquals(List.extrapolateLeft(-1), test);
+        double test1 = List.apply(10);
+        Assertions.assertEquals(List.extrapolateRight(10), test1);
+        double test2 = List.apply(3.5);
+        Assertions.assertEquals(List.interpolate(3.5, 2), test2);
+    }
+
 }
