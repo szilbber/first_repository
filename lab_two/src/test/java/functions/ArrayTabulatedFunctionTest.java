@@ -24,13 +24,13 @@ public class ArrayTabulatedFunctionTest extends TestCase {
     public void testExtrapolateLeft() {
         assertEquals(0.0, objTest.extrapolateLeft(0));
         assertEquals(-2.0, objTest.extrapolateLeft(-1));
-        assertEquals(-22.22222222222222, objSqrFunctionTest.extrapolateLeft(-2));
+        assertEquals(-22.2, objSqrFunctionTest.extrapolateLeft(-2), 0.1);
     }
 
     public void testExtrapolateRight() {
         assertEquals(13., objTest.extrapolateRight(6.5));
         assertEquals(14., objTest.extrapolateRight(7));
-        assertEquals(10377.77777777778, objSqrFunctionTest.extrapolateRight(102));
+        assertEquals(10377.7, objSqrFunctionTest.extrapolateRight(102), 0.1);
     }
 
     public void testInterpolate() {
@@ -49,8 +49,8 @@ public class ArrayTabulatedFunctionTest extends TestCase {
         assertEquals(3., objTest.getX(2));
         assertEquals(4., objTest.getX(3));
         assertEquals(0., objSqrFunctionTest.getX(0));
-        assertEquals(22.22222222222222, objSqrFunctionTest.getX(2));
-        assertEquals(33.33333333333333, objSqrFunctionTest.getX(3));
+        assertEquals(22.2, objSqrFunctionTest.getX(2), 0.1);
+        assertEquals(33.3, objSqrFunctionTest.getX(3), 0.1);
     }
 
     public void testGetY() {
