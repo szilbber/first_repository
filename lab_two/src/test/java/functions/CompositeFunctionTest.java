@@ -3,7 +3,7 @@ import org.junit.Test;
 import junit.framework.Assert;
 public class CompositeFunctionTest {
 
-    MathFunction sinFunc = new XFunction();
+    MathFunction sinFunc = new SinFunction();
     MathFunction sqrFunc = new SqrFunctions();
     MathFunction unitFunc = new UnitFunctions();
     MathFunction test3 = new CompositeFunction(sqrFunc, sinFunc);

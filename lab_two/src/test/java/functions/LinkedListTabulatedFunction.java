@@ -168,7 +168,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
     }
 
 
-    public void SetY(int index, double value) {
+    public void setY(int index, double value) {
         getNode(index).y = value;
     }
 

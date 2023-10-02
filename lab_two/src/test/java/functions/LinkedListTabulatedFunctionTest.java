@@ -62,7 +62,7 @@ public class LinkedListTabulatedFunctionTest {
     }
     @Test
     public void SetY() {
-        List.SetY(3, 9);
+        List.setY(3, 9);
         Assertions.assertEquals(9, List.getY(3));
     }
     @Test
