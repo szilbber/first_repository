@@ -1,18 +1,18 @@
 package functions;
 
 public class ConstantFunction implements MathFunction {
-    private final double ConstNumber;
+    private final double constant;
 
     public ConstantFunction(double x) {
-        ConstNumber = x;
+        constant = x;
     }
 
-    public double getConstNumber() {
-        return ConstNumber;
+    public double getConstant() {
+        return constant;
     }
 
     public double apply(double x) {
-        return ConstNumber;
+        return constant;
     }
 
 
