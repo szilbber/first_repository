@@ -10,17 +10,15 @@ class Node {
         this.x = x;
         this.y = y;
     }
-
 }
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Insertable {
     private Node head;
 
     private Node getNode(int index) {
         //int index_temp = 0;
         Node i = head;
-        for (int index_temp = 0; index_temp != index; i = i.next, index_temp++) {
-        }
+        for (int index_temp = 0; index_temp != index; i = i.next, index_temp++) ;
         return i;
     }
 
@@ -36,7 +34,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
             head.prev = newNode;
             newNode.prev = last;
             newNode.next = head;
-
         }
         count++;
     }
@@ -255,5 +252,30 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
                 return interpolate(x, froorNode.x, froorNode.next.x, froorNode.y, froorNode.next.y);
             }
         }
+    }
+
+    public void insert(double x, double y) {
+        if (x < leftBound()) {
+            insertNodeFront(head.prev, new Node(x, y));
+            head = head.prev;
+        } else if (x > rightBound()) {
+            insertNodeFront(head.prev, new Node(x, y));
+        } else {
+            Node floorNode = floorNodeOfX(x);
+            if (floorNode.next.x == x)
+                floorNode.next.y = y;
+            else if (floorNode.x == x)
+                floorNode.y = y;
+            else
+                insertNodeFront(floorNode, new Node(x, y));
+        }
+    }
+
+    public void insertNodeFront(Node currentNode, Node nextNode) {
+        nextNode.next = currentNode.next;
+        nextNode.prev = currentNode;
+        currentNode.next.prev = nextNode;
+        currentNode.next = nextNode;
+        count++;
     }
 }

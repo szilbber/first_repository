@@ -5,124 +5,139 @@ import org.junit.jupiter.api.Assertions;
 public class LinkedListTabulatedFunctionTest {
     double[] xVal = {1,2,3,4};
     double[] yVal = {5,6,7,8};
-    LinkedListTabulatedFunction List = new LinkedListTabulatedFunction(xVal,yVal);
+    LinkedListTabulatedFunction list = new LinkedListTabulatedFunction(xVal,yVal);
     double[] x_one = {3};
     double[] y_one = {4};
-    LinkedListTabulatedFunction List_one = new LinkedListTabulatedFunction(x_one,y_one);
+    LinkedListTabulatedFunction listOne = new LinkedListTabulatedFunction(x_one,y_one);
 
-    MathFunction MyTestFunction = new LinkedListTabulatedFunction(xVal, yVal);
-    MathFunction Unit = new UnitFunctions();
-    MathFunction AsinSin = new AsinSinFunction();
-    MathFunction Unit_My = Unit.andThen(MyTestFunction);
-    MathFunction AsinSin_My = AsinSin.andThen(MyTestFunction);
+    MathFunction myTestFunction = new LinkedListTabulatedFunction(xVal, yVal);
+    MathFunction unitFunctions = new UnitFunctions();
+    MathFunction asinSinFunction = new AsinSinFunction();
+    MathFunction unitMy = unitFunctions.andThen(myTestFunction);
+    MathFunction asinSinMy = asinSinFunction.andThen(myTestFunction);
 
     @Test
     public void AndThanList(){
-        Assertions.assertEquals(1,Unit_My.apply(1));
-        Assertions.assertEquals(0.716815,AsinSin_My.apply(3), 0.000_001);
+        Assertions.assertEquals(1, unitMy.apply(1));
+        Assertions.assertEquals(0.716815, asinSinMy.apply(3), 0.000_001);
     }
     @Test
     public void floorIndexOfX(){
-        double x = List.floorIndexOfX(3);
+        double x = list.floorIndexOfX(3);
         Assertions.assertEquals(2, x);
-        double x1 = List.floorIndexOfX(5);
+        double x1 = list.floorIndexOfX(5);
         Assertions.assertEquals(4, x1);
-        double x2 = List.floorIndexOfX(-1);
+        double x2 = list.floorIndexOfX(-1);
         Assertions.assertEquals(0, x2);
-        double x3 = List.floorIndexOfX(3.5);
+        double x3 = list.floorIndexOfX(3.5);
         Assertions.assertEquals(2, x3);
-        double x4 = List.floorIndexOfX(4);
+        double x4 = list.floorIndexOfX(4);
         Assertions.assertEquals(3, x4);
     }
     @Test
     public void extrapolateLeft(){
-        double test = List.extrapolateLeft(-1);
+        double test = list.extrapolateLeft(-1);
         Assertions.assertEquals(3, test);
-        double test1 = List_one.interpolate(3, 0);
+        double test1 = listOne.interpolate(3, 0);
         Assertions.assertEquals(3, test1);
     }
     @Test
     public void extrapolateRight(){
-        double test = List.extrapolateLeft(5);
+        double test = list.extrapolateLeft(5);
         Assertions.assertEquals(9, test);
-        double test1 = List_one.interpolate(3, 0);
+        double test1 = listOne.interpolate(3, 0);
         Assertions.assertEquals(3, test1);
     }
     @Test
     public void interpolate(){
-        double test = List.interpolate(2, 0);
+        double test = list.interpolate(2, 0);
         Assertions.assertEquals(6, test);
-        double test1 = List_one.interpolate(3, 0);
+        double test1 = listOne.interpolate(3, 0);
         Assertions.assertEquals(3, test1);
     }
 
     @Test
     public void getCount(){
-        int x = List.getCount();
+        int x = list.getCount();
         Assertions.assertEquals(4, x);
     }
     @Test
     public void getX() {
-        double x = List.getX(1);
+        double x = list.getX(1);
         Assertions.assertEquals(2, x);
     }
 
     @Test
     public void getY() {
-        double y = List.getY(1);
+        double y = list.getY(1);
         Assertions.assertEquals(6, y);
     }
     @Test
     public void SetY() {
-        List.setY(3, 9);
-        Assertions.assertEquals(9, List.getY(3));
+        list.setY(3, 9);
+        Assertions.assertEquals(9, list.getY(3));
     }
     @Test
     public void indexOfX(){
-        int index = List.indexOfX(4);
+        int index = list.indexOfX(4);
         Assertions.assertEquals(3, index);
     }
     @Test
     public void indexOfY(){
-        int index = List.indexOfY(7);
+        int index = list.indexOfY(7);
         Assertions.assertEquals(2, index);
     }
     @Test
     public void leftBound() {
-        double x = List.leftBound();
+        double x = list.leftBound();
         Assertions.assertEquals(1, x);
     }
     @Test
     //Возвращает самый правый х
     public void rightBound() {
-        double x = List.rightBound();
+        double x = list.rightBound();
         Assertions.assertEquals(4, x);
     }
     @Test
     public void floorNodeOfX(){
-        Node test = List.floorNodeOfX(3);
+        Node test = list.floorNodeOfX(3);
         Assertions.assertEquals(3, test.x);
 
-        Node x1 = List.floorNodeOfX(5);
+        Node x1 = list.floorNodeOfX(5);
         Assertions.assertEquals(4, x1.x);
 
-        Node x2 = List.floorNodeOfX(-1);
+        Node x2 = list.floorNodeOfX(-1);
         Assertions.assertEquals(1, x2.x);
 
-        Node x3 = List.floorNodeOfX(3.5);
+        Node x3 = list.floorNodeOfX(3.5);
         Assertions.assertEquals(3, x3.x);
 
-        Node x4 = List.floorNodeOfX(4);
+        Node x4 = list.floorNodeOfX(4);
         Assertions.assertEquals(4, x4.x);
     }
     @Test
     public void apply(){
-        double test = List.apply(-1);
-        Assertions.assertEquals(List.extrapolateLeft(-1), test);
-        double test1 = List.apply(10);
-        Assertions.assertEquals(List.extrapolateRight(10), test1);
-        double test2 = List.apply(3.5);
-        Assertions.assertEquals(List.interpolate(3.5, 2), test2);
+        double test = list.apply(-1);
+        Assertions.assertEquals(list.extrapolateLeft(-1), test);
+        double test1 = list.apply(10);
+        Assertions.assertEquals(list.extrapolateRight(10), test1);
+        double test2 = list.apply(3.5);
+        Assertions.assertEquals(list.interpolate(3.5, 2), test2);
+    }
+
+    @Test
+    public void insertTest(){
+        list.insert(1, 10);
+        Assertions.assertEquals(10.,list.getY(0));
+        list.insert(2, 10);
+        Assertions.assertEquals(10, list.getY(1));
+        list.insert(1.5, 6);
+        Assertions.assertEquals(6., list.getY(1));
+        list.insert(-10, -50);
+        Assertions.assertEquals(-50., list.getY(0));
+        Assertions.assertEquals(10, list.getY(1));
+        list.insert(100, 100);
+        Assertions.assertEquals(100., list.getY(list.getCount() - 1));
     }
 
 }
