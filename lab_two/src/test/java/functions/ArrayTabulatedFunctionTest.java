@@ -6,10 +6,10 @@ public class ArrayTabulatedFunctionTest extends TestCase {
     double[] xValue = {1, 2, 3, 4, 5};
     double[] yValue = {2, 4, 6, 8, 10};
 
-    MathFunction func = new SqrFunctions();
+    MathFunction sqrFunctions = new SqrFunctions();
 
     ArrayTabulatedFunction objTest = new ArrayTabulatedFunction(xValue, yValue);
-    ArrayTabulatedFunction objSqrFunctionTest =  new ArrayTabulatedFunction(func, 0, 100, 10);
+    ArrayTabulatedFunction objSqrFunctionTest =  new ArrayTabulatedFunction(sqrFunctions, 0, 100, 10);
 
     public void testFloorIndexOfX() {
         assertEquals(0, objTest.floorIndexOfX(-2));

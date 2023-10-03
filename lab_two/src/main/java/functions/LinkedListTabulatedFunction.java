@@ -1,4 +1,5 @@
 package functions;
+
 class Node {
     public Node next;
     public Node prev;
@@ -42,7 +43,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
     LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
         for (int i = 0; i < xValues.length; i++) {
-                addNode(xValues[i], yValues[i]);
+            addNode(xValues[i], yValues[i]);
         }
     }
 
@@ -55,7 +56,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
 
         head.x = xFrom;
         head.prev.x = xTo;
-        double step = (xTo-xFrom) / (count - 1);
+        double step = (xTo - xFrom) / (count - 1);
         double xCordinate = xFrom;
 
         if (xFrom == xTo) {
@@ -84,7 +85,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
                     index_floor = 0;
                 }
                 break;
-            } else{
+            } else {
                 allXsmaller = false;
                 index_floor = index_temp;
                 break;
@@ -146,8 +147,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         } else {
             double leftY = getY(floorIndex);
             double leftX = getX(floorIndex);
-            double rightY = getY(floorIndex+1);
-            double rightX = getX(floorIndex+1);
+            double rightY = getY(floorIndex + 1);
+            double rightX = getX(floorIndex + 1);
             return interpolate(x, leftX, rightX, leftY, rightY);
         }
     }
@@ -182,7 +183,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
                 break;
             } else index++;
         }
-        if(flag && (x==head.prev.x)){
+        if (flag && (x == head.prev.x)) {
             flag = false;
         }
         if (flag) index = -1;
@@ -198,7 +199,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
                 break;
             } else index++;
         }
-        if(flag && (y==head.prev.y)){
+        if (flag && (y == head.prev.y)) {
             flag = false;
         }
         if (flag) index = -1;
@@ -215,7 +216,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         return head.prev.x;
     }
 
-    protected Node floorNodeOfX(double x){
+    protected Node floorNodeOfX(double x) {
         Node floorNode = head;
         boolean allXsmaller = true;
         Node temp = head;
@@ -229,7 +230,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
                     floorNode = head;
                 }
                 break;
-            }else if(temp.x == x){
+            } else if (temp.x == x) {
                 allXsmaller = false;
                 floorNode = temp;
                 break;
@@ -238,6 +239,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
         if (allXsmaller) floorNode = head.prev;
         return floorNode;
     }
+
     public double apply(double x) {
         if (x < leftBound())
             return extrapolateLeft(x);
@@ -249,8 +251,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction {
             if (searchIndexOfX != -1)
                 return getY(searchIndexOfX);
             else {
-                Node i = floorNodeOfX(x);
-                return interpolate(x, i.x, i.next.x, i.y, i.next.y);
+                Node froorNode = floorNodeOfX(x);
+                return interpolate(x, froorNode.x, froorNode.next.x, froorNode.y, froorNode.next.y);
             }
         }
     }

@@ -9,6 +9,18 @@ public class LinkedListTabulatedFunctionTest {
     double[] x_one = {3};
     double[] y_one = {4};
     LinkedListTabulatedFunction List_one = new LinkedListTabulatedFunction(x_one,y_one);
+
+    MathFunction MyTestFunction = new LinkedListTabulatedFunction(xVal, yVal);
+    MathFunction Unit = new UnitFunctions();
+    MathFunction AsinSin = new AsinSinFunction();
+    MathFunction Unit_My = Unit.andThen(MyTestFunction);
+    MathFunction AsinSin_My = AsinSin.andThen(MyTestFunction);
+
+    @Test
+    public void AndThanList(){
+        Assertions.assertEquals(1,Unit_My.apply(1));
+        Assertions.assertEquals(0.716815,AsinSin_My.apply(3), 0.000_001);
+    }
     @Test
     public void floorIndexOfX(){
         double x = List.floorIndexOfX(3);

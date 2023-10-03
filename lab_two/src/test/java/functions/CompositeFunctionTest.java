@@ -5,7 +5,7 @@ import junit.framework.Assert;
 
 public class CompositeFunctionTest {
 
-    MathFunction sinFunc = new SinFunction();
+    MathFunction sinFunc = new AsinSinFunction();
     MathFunction sqrFunc = new SqrFunctions();
     MathFunction unitFunc = new UnitFunctions();
     MathFunction zeroFunc = new ZeroFunction();
