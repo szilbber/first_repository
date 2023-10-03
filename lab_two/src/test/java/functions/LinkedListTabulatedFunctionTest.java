@@ -140,4 +140,13 @@ public class LinkedListTabulatedFunctionTest {
         Assertions.assertEquals(100., list.getY(list.getCount() - 1));
     }
 
+    @Test
+    public void removeTest(){
+        list.remove(0);
+        Assertions.assertEquals(6.0, list.getY(0));
+        list.remove(1);
+        Assertions.assertEquals(8.0, list.getY(1));
+        list.remove(list.getCount() - 1);
+        Assertions.assertEquals(6.0, list.getY(list.getCount()- 1));
+    }
 }

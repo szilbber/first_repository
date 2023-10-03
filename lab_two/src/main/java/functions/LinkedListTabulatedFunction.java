@@ -12,7 +12,7 @@ class Node {
     }
 }
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Insertable {
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Insertable, Removable {
     private Node head;
 
     private Node getNode(int index) {
@@ -277,5 +277,23 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         currentNode.next.prev = nextNode;
         currentNode.next = nextNode;
         count++;
+    }
+
+    public void remove(int index) {
+        Node currentNode = head;
+
+        while (index-- != 0)
+            currentNode = currentNode.next;
+
+        currentNode.prev.next = currentNode.next;
+        currentNode.next.prev = currentNode.prev;
+        --count;
+
+        if (currentNode == head) {
+            if (count == 0)
+                head = null;
+            else
+                head = currentNode.next;
+        }
     }
 }
