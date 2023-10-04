@@ -10,17 +10,6 @@ public class LinkedListTabulatedFunctionTest {
     double[] y_one = {4};
     LinkedListTabulatedFunction listOne = new LinkedListTabulatedFunction(x_one,y_one);
 
-    MathFunction myTestFunction = new LinkedListTabulatedFunction(xVal, yVal);
-    MathFunction unitFunctions = new UnitFunctions();
-    MathFunction asinSinFunction = new AsinSinFunction();
-    MathFunction unitMy = unitFunctions.andThen(myTestFunction);
-    MathFunction asinSinMy = asinSinFunction.andThen(myTestFunction);
-
-    @Test
-    public void AndThanList(){
-        Assertions.assertEquals(1, unitMy.apply(1));
-        Assertions.assertEquals(0.716815, asinSinMy.apply(3), 0.000_001);
-    }
     @Test
     public void floorIndexOfX(){
         double x = list.floorIndexOfX(3);

@@ -2,6 +2,7 @@ package functions;
 
 import org.junit.Test;
 import junit.framework.Assert;
+import org.junit.jupiter.api.Assertions;
 
 public class CompositeFunctionTest {
 
@@ -21,6 +22,22 @@ public class CompositeFunctionTest {
     MathFunction mulSqrFunc = tableMultiplyContFunc.andThen(tabulateSqrFunction);
     MathFunction expLogSqrFunc = new ExponentialLogFunction(2, 2).andThen(tabulateSqrFunction);
 
+    //Тесты для X
+    double[] xVal = {1,2,3,4};
+    double[] yVal = {5,6,7,8};
+    MathFunction myTestFunction = new LinkedListTabulatedFunction(xVal, yVal);
+    MathFunction unitFunctions = new UnitFunctions();
+    MathFunction asinSinFunction = new AsinSinFunction();
+    MathFunction unitMy = unitFunctions.andThen(myTestFunction);
+    MathFunction asinSinMy = asinSinFunction.andThen(myTestFunction);
+
+    @Test
+    public void AndThanList(){
+        Assertions.assertEquals(1, unitMy.apply(1));
+        Assertions.assertEquals(0.716815, asinSinMy.apply(3), 0.000_001);
+    }
+
+    //Тесты для Y
     @Test
     public void TestEquals() {
         Assert.assertEquals(0.0, test3.apply(0));

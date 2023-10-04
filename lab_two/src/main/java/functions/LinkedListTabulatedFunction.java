@@ -258,8 +258,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         if (x < leftBound()) {
             insertNodeFront(head.prev, new Node(x, y));
             head = head.prev;
-        } else if (x > rightBound()) {
-            insertNodeFront(head.prev, new Node(x, y));
         } else {
             Node floorNode = floorNodeOfX(x);
             if (floorNode.next.x == x)
