@@ -89,20 +89,15 @@ public class LinkedListTabulatedFunctionTest {
     }
     @Test
     public void floorNodeOfX(){
-        Node test = list.floorNodeOfX(3);
-        Assertions.assertEquals(3, test.x);
+        Assertions.assertEquals(3, list.floorNodeOfX(3).x);
 
-        Node x1 = list.floorNodeOfX(5);
-        Assertions.assertEquals(4, x1.x);
+        Assertions.assertEquals(4, list.floorNodeOfX(5).x);
 
-        Node x2 = list.floorNodeOfX(-1);
-        Assertions.assertEquals(1, x2.x);
+        Assertions.assertEquals(1, list.floorNodeOfX(-1).x);
 
-        Node x3 = list.floorNodeOfX(3.5);
-        Assertions.assertEquals(3, x3.x);
+        Assertions.assertEquals(3, list.floorNodeOfX(3.5).x);
 
-        Node x4 = list.floorNodeOfX(4);
-        Assertions.assertEquals(4, x4.x);
+        Assertions.assertEquals(4, list.floorNodeOfX(4).x);
     }
     @Test
     public void apply(){

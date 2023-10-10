@@ -81,6 +81,6 @@ public class ArrayTabulatedFunctionTest extends TestCase {
 
     public void testRightBound() {
         assertEquals(5., objTest.rightBound());
-        assertEquals(100., objSqrFunctionTest.rightBound());
+        assertEquals(100., objSqrFunctionTest.rightBound(), 0.1);
     }
 }

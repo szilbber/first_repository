@@ -1,18 +1,20 @@
 package functions;
 
-class Node {
-    public Node next;
-    public Node prev;
-    public double x;
-    public double y;
 
-    Node(double x, double y) {
-        this.x = x;
-        this.y = y;
-    }
-}
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Insertable, Removable {
+    static class Node {
+        public Node next;
+        public Node prev;
+        public double x;
+        public double y;
+
+        Node(double x, double y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
     private Node head;
 
     private Node getNode(int index) {

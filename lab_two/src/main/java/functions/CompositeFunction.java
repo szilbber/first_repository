@@ -1,6 +1,6 @@
 package functions;
 
-class CompositeFunction implements MathFunction {
+public class CompositeFunction implements MathFunction {
     private MathFunction firstFunction, secondFunction;
 
     public CompositeFunction(MathFunction firstFunction, MathFunction secondFunction) {

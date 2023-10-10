@@ -31,6 +31,8 @@ public class CompositeFunctionTest {
     MathFunction unitMy = unitFunctions.andThen(myTestFunction);
     MathFunction asinSinMy = asinSinFunction.andThen(myTestFunction);
 
+
+
     @Test
     public void AndThanList(){
         Assertions.assertEquals(1, unitMy.apply(1));
@@ -42,6 +44,7 @@ public class CompositeFunctionTest {
     public void TestEquals() {
         Assert.assertEquals(0.0, test3.apply(0));
         Assert.assertEquals(1.0, test4.apply(0));
+        CompositeFunction func = new CompositeFunction(sinFunc, unitFunc);
     }
 
     @Test
