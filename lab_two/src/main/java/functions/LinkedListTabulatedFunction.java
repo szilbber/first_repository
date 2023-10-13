@@ -1,6 +1,7 @@
 package functions;
 
 
+import java.util.Objects;
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Insertable, Removable {
     static class Node {
@@ -12,6 +13,35 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         Node(double x, double y) {
             this.x = x;
             this.y = y;
+        }
+
+        @Override
+        public String toString() {
+            return "(" +
+                    + x + ", "
+                    + y +
+                    ')';
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if ((this == o)) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Node node = (Node) o;
+            return Double.compare(x, node.x) == 0 && Double.compare(y, node.y) == 0 && Objects.equals(next, node.next) && Objects.equals(prev, node.prev);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(x, y);
+        }
+
+        @Override
+        protected Object clone() throws CloneNotSupportedException {
+            Node cloneNode = new Node(x,y);
+            cloneNode.prev = this.prev;
+            cloneNode.next = this.next;
+            return cloneNode;
         }
     }
 
@@ -93,26 +123,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         if (allXsmaller) index_floor = count;
         return index_floor;
     }
-
-//        for (Node i = head; index_temp != count; i = i.next, index_temp++) {
-
-//            if ((i.x < x) && (i.x >= maxX)) {
-//                maxX = i.x;
-//                index_maxX = index_temp;
-//                allXbigger = false;
-//                allXsmaller = false;
-//            }
-//            if (i.x > x) {
-//                allXsmaller = false;
-//            }
-//            if (i.x > x) {
-//                allXbigger = false;
-//            }
-//        }
-//        if (allXsmaller) index_maxX = count;
-//        if (allXbigger) index_maxX = 0;
-//        return index_maxX;
-    //}
 
     protected double extrapolateLeft(double x) {
         if ((head.next == head) && (head.prev == head)) {
@@ -295,5 +305,55 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
             else
                 head = currentNode.next;
         }
+
+
+    }
+
+    @Override
+    public String toString() {
+
+        String stringArray = "";
+        for(int i = 0; i!=count; i++ ){
+            stringArray += ("(" + getX(i) + ";" + getY(i) + ") ");
+        }
+        return stringArray;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        LinkedListTabulatedFunction that = (LinkedListTabulatedFunction) o;
+        boolean flag = true;
+        for(int i = 0; i!=count; i++ ){
+            if((this.getNode(i).x != that.getNode(i).x) || (this.getNode(i).y != that.getNode(i).y)){
+                flag = false;
+                break;
+            }
+        }
+        return ((getClass() == that.getClass()) && (flag==true));
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 31;
+        for(int i = 0; i!=count; i++){
+            result = result * 31 + this.getNode(i).hashCode();
+        }
+        return result;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        double xCloneValues [] = new double[count];
+        double yCloneValues [] = new double[count];
+        for(int i = 0; i!=count; i++){
+            xCloneValues[i] = this.getX(i);
+            yCloneValues[i] = this.getY(i);
+        }
+        LinkedListTabulatedFunction cloneList = new LinkedListTabulatedFunction(xCloneValues,yCloneValues);
+        cloneList.head = this.head;
+        xCloneValues[count - 1] = cloneList.head.prev.x;
+        yCloneValues[count - 1] = cloneList.head.prev.y;
+        return cloneList;
     }
 }

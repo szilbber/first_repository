@@ -133,4 +133,64 @@ public class LinkedListTabulatedFunctionTest {
         list.remove(list.getCount() - 1);
         Assertions.assertEquals(6.0, list.getY(list.getCount()- 1));
     }
+    @Test
+    public void toStringNodeTest(){
+        LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(1, 5);
+        Assertions.assertEquals("(1.0, 5.0)", node.toString());
+    }
+    @Test
+    public void equalsNodeTest() {
+        LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(3, 4);
+        LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(3, 4);
+        LinkedListTabulatedFunction.Node node3 = new LinkedListTabulatedFunction.Node(3, 7);
+        Assertions.assertEquals(true, node2.equals(node));
+        Assertions.assertNotEquals(true, node3.equals(node2));
+    }
+
+    @Test
+    public void hashCodeNodeTest() {
+        LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(1, 5);
+        LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(1, 5);
+        Assertions.assertEquals(node2.hashCode(), node.hashCode());
+    }
+    @Test
+    public void cloneNodeTest() throws CloneNotSupportedException {
+        LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(3, 4);
+        Assertions.assertEquals(node, node.clone());
+    }
+    @Test
+    public void toStringTest() {
+        Assertions.assertEquals("(1.0;5.0) (2.0;6.0) (3.0;7.0) (4.0;8.0) ", list.toString());
+    }
+    @Test
+    public void equalsTest(){
+        double[] xVal = {1,2,3,4};
+        double[] yVal = {5,6,7,8};
+        LinkedListTabulatedFunction list1 = new LinkedListTabulatedFunction(xVal,yVal);
+
+        double[] xVal2 = {1,6,3,4};
+        double[] yVal2 = {5,6,7,8};
+        LinkedListTabulatedFunction list2 = new LinkedListTabulatedFunction(xVal2,yVal2);
+
+        Assertions.assertTrue(list.equals(list1));
+        Assertions.assertFalse(list.equals(list2));
+    }
+
+    @Test
+    public void hashCodeTest(){
+        double[] xVal = {1,2,3,4};
+        double[] yVal = {5,6,7,8};
+        LinkedListTabulatedFunction list1 = new LinkedListTabulatedFunction(xVal,yVal);
+
+        double[] xVal2 = {1,6,3,4};
+        double[] yVal2 = {5,6,7,8};
+        LinkedListTabulatedFunction list2 = new LinkedListTabulatedFunction(xVal2,yVal2);
+
+        Assertions.assertEquals(list1.hashCode(), list.hashCode());
+        Assertions.assertNotEquals(list2.hashCode(), list.hashCode());
+    }
+    @Test
+    public void cloneTest() throws CloneNotSupportedException {
+        Assertions.assertEquals(list, list.clone());
+    }
 }
