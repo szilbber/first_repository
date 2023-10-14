@@ -351,9 +351,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
             yCloneValues[i] = this.getY(i);
         }
         LinkedListTabulatedFunction cloneList = new LinkedListTabulatedFunction(xCloneValues,yCloneValues);
-        cloneList.head = this.head;
-        xCloneValues[count - 1] = cloneList.head.prev.x;
-        yCloneValues[count - 1] = cloneList.head.prev.y;
         return cloneList;
     }
 }
