@@ -9,7 +9,7 @@ public class ArrayTabulatedFunctionTest extends TestCase {
     MathFunction sqrFunctions = new SqrFunctions();
 
     ArrayTabulatedFunction objTest = new ArrayTabulatedFunction(xValue, yValue);
-    ArrayTabulatedFunction objSqrFunctionTest =  new ArrayTabulatedFunction(sqrFunctions, 0, 100, 10);
+    ArrayTabulatedFunction objSqrFunctionTest = new ArrayTabulatedFunction(sqrFunctions, 0, 100, 10);
 
     public void testFloorIndexOfX() {
         assertEquals(0, objTest.floorIndexOfX(-2));
@@ -65,13 +65,13 @@ public class ArrayTabulatedFunctionTest extends TestCase {
     }
 
     public void testIndexOfX() {
-        assertEquals(0,objTest.indexOfX(1));
-        assertEquals(-1,objTest.indexOfX(10));
+        assertEquals(0, objTest.indexOfX(1));
+        assertEquals(-1, objTest.indexOfX(10));
     }
 
     public void testIndexOfY() {
-        assertEquals(0,objTest.indexOfY(2.));
-        assertEquals(-1,objTest.indexOfY(2.1));
+        assertEquals(0, objTest.indexOfY(2.));
+        assertEquals(-1, objTest.indexOfY(2.1));
     }
 
     public void testLeftBound() {

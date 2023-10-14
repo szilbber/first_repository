@@ -103,4 +103,32 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     public double rightBound() {
         return xValues[count - 1];
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ArrayTabulatedFunction that = (ArrayTabulatedFunction) o;
+        return Arrays.equals(xValues, that.xValues) && Arrays.equals(yValues, that.yValues);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Arrays.hashCode(xValues);
+        result = 31 * result + Arrays.hashCode(yValues);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "ArrayTabulatedFunction{" +
+                "xValues=" + Arrays.toString(xValues) +
+                ", yValues=" + Arrays.toString(yValues) +
+                '}';
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

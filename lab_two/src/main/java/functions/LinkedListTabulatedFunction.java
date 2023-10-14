@@ -82,22 +82,30 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
             xTo = xFrom;
             xFrom = temp;
         }
-
-        head.x = xFrom;
-        head.prev.x = xTo;
         double step = (xTo - xFrom) / (count - 1);
         double xCordinate = xFrom;
-
         if (xFrom == xTo) {
-            for (int i = 0; i < count; i++) {
+            for (int i = 1; i < count; i++) {
                 addNode(xFrom, source.apply(xFrom));
             }
         } else {
-            for (int i = 0; i < count; i++) {
+            for (int i = 1; i < count; i++) {
                 addNode(xCordinate, source.apply(xCordinate));
                 xCordinate += step;
             }
         }
+        head.x = xFrom;
+        head.prev.x = xTo;
+//        if (xFrom == xTo) {
+//            for (int i = 1; i < count; i++) {
+//                addNode(xFrom, source.apply(xFrom));
+//            }
+//        } else {
+//            for (int i = 1; i < count; i++) {
+//                addNode(xCordinate, source.apply(xCordinate));
+//                xCordinate += step;
+//            }
+//        }
     }
 
     protected int floorIndexOfX(double x) {
@@ -116,7 +124,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
                 break;
             } else {
                 allXsmaller = false;
-                index_floor = index_temp;
+                index_floor = index_temp-1;
                 break;
             }
         }

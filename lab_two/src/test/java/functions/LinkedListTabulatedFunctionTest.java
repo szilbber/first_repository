@@ -10,10 +10,13 @@ public class LinkedListTabulatedFunctionTest {
     double[] y_one = {4};
     LinkedListTabulatedFunction listOne = new LinkedListTabulatedFunction(x_one,y_one);
 
+    MathFunction sqrFunctions = new SqrFunctions();
+    LinkedListTabulatedFunction listTwo = new LinkedListTabulatedFunction(sqrFunctions,0,100,10 );
+
     @Test
     public void floorIndexOfX(){
         double x = list.floorIndexOfX(3);
-        Assertions.assertEquals(2, x);
+        Assertions.assertEquals(1, x);
         double x1 = list.floorIndexOfX(5);
         Assertions.assertEquals(4, x1);
         double x2 = list.floorIndexOfX(-1);
@@ -21,14 +24,17 @@ public class LinkedListTabulatedFunctionTest {
         double x3 = list.floorIndexOfX(3.5);
         Assertions.assertEquals(2, x3);
         double x4 = list.floorIndexOfX(4);
-        Assertions.assertEquals(3, x4);
+        Assertions.assertEquals(2, x4);
+        Assertions.assertEquals(0, listTwo.floorIndexOfX(10));
+        Assertions.assertEquals(1, listTwo.floorIndexOfX(15));
     }
     @Test
     public void extrapolateLeft(){
         double test = list.extrapolateLeft(-1);
         Assertions.assertEquals(3, test);
-        double test1 = listOne.interpolate(3, 0);
+        double test1 = listOne.extrapolateLeft(3);
         Assertions.assertEquals(3, test1);
+
     }
     @Test
     public void extrapolateRight(){
@@ -51,7 +57,7 @@ public class LinkedListTabulatedFunctionTest {
         Assertions.assertEquals(4, x);
     }
     @Test
-    public void getX() {
+    public void getX(){
         double x = list.getX(1);
         Assertions.assertEquals(2, x);
     }
