@@ -1,5 +1,7 @@
 package functions;
 
+import com.sun.jdi.InternalException;
+
 class IdentityFunction implements MathFunction {
     public double apply(double x) {
         return x;
@@ -7,21 +9,23 @@ class IdentityFunction implements MathFunction {
 
     @Override
     public String toString() {
-        return "IdentityFunction{}";
+        return "IdentityFunction(x) ";
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return 41;
     }
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        if (this == obj)
+            return true;
+        return obj != null && getClass() == obj.getClass();
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public Object clone() {
+        return new IdentityFunction();
     }
 }
