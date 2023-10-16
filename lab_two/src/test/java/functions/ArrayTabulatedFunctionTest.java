@@ -83,4 +83,39 @@ public class ArrayTabulatedFunctionTest extends TestCase {
         assertEquals(5., objTest.rightBound());
         assertEquals(100., objSqrFunctionTest.rightBound(), 0.1);
     }
+
+    public void testToString() {
+        String expectedString = "ArrayTabulatedFunction{xValues=[1.0, 2.0, 3.0, 4.0, 5.0], yValues=[2.0, 4.0, 6.0, 8.0, 10.0]}";
+        assertEquals(expectedString, objTest.toString());
+    }
+
+
+    public void testHashCode() {
+        ArrayTabulatedFunction objTestCopy = new ArrayTabulatedFunction(xValue, yValue);
+
+        // Тест на равенство hashCode двух объектов с одинаковыми значениями
+        assertEquals(objTest.hashCode(), objTestCopy.hashCode());
+    }
+
+    public void testEquals() {
+        assertEquals(objTest, objTest);
+
+        ArrayTabulatedFunction objTestCopy = new ArrayTabulatedFunction(xValue, yValue);
+
+        assertEquals(objTest, objTestCopy);
+
+        double[] differentXValues = {1, 2, 3, 4, 6};
+        double[] differentYValues = {2, 4, 6, 8, 12};
+        ArrayTabulatedFunction objTestDifferent = new ArrayTabulatedFunction(differentXValues, differentYValues);
+
+        assertFalse(objTest.equals(objTestDifferent));
+    }
+
+    public void testClone() {
+        ArrayTabulatedFunction clonedFunction = objTest.clone();
+
+        assertNotSame(objTest, clonedFunction);
+        assertEquals(objTest, clonedFunction);
+        assertFalse(objTest.equals(sqrFunctions));
+    }
 }

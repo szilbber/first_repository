@@ -2,6 +2,8 @@ package functions;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
+import java.util.concurrent.ExecutionException;
+
 public class LinkedListTabulatedFunctionTest {
     double[] xVal = {1,2,3,4};
     double[] yVal = {5,6,7,8};

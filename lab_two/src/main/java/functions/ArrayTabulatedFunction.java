@@ -128,7 +128,12 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public ArrayTabulatedFunction clone() {
+        double[] clonedXValues = Arrays.copyOf(xValues, xValues.length);
+        double[] clonedYValues = Arrays.copyOf(yValues, yValues.length);
+
+        return new ArrayTabulatedFunction(clonedXValues, clonedYValues);
     }
+
+
 }
