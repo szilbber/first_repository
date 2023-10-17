@@ -48,9 +48,13 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     private Node head;
 
     private Node getNode(int index) {
-        //int index_temp = 0;
         Node i = head;
-        for (int index_temp = 0; index_temp != index; i = i.next, index_temp++) ;
+        try {
+            if((index > count) || (index < 0)) throw new Exception("IllegalArgumentException");
+            for (int index_temp = 0; index_temp != index; i = i.next, index_temp++) ;
+        }catch(Exception e){
+            System.err.println(e.getMessage());
+        }
         return i;
     }
 
@@ -76,7 +80,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         }
     }
 
-    LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
+    LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count){
         if (xFrom > xTo) {
             double temp = xTo;
             xTo = xFrom;
@@ -96,39 +100,34 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         }
         head.x = xFrom;
         head.prev.x = xTo;
-//        if (xFrom == xTo) {
-//            for (int i = 1; i < count; i++) {
-//                addNode(xFrom, source.apply(xFrom));
-//            }
-//        } else {
-//            for (int i = 1; i < count; i++) {
-//                addNode(xCordinate, source.apply(xCordinate));
-//                xCordinate += step;
-//            }
-//        }
     }
 
     protected int floorIndexOfX(double x) {
         int index_floor = 0;
-        boolean allXsmaller = true;
-        Node temp = head;
-        for (int index_temp = 0; index_temp != count; ++index_temp) {
-            if (temp.x < x) {
-                temp = temp.next;
-            } else if (temp.x > x) {
-                allXsmaller = false;
-                index_floor = index_temp - 1;
-                if (index_temp == 0) {
-                    index_floor = 0;
+        try {
+            if(x < head.x) throw new Exception("IllegalArgumentException");
+            boolean allXsmaller = true;
+            Node temp = head;
+            for (int index_temp = 0; index_temp != count; ++index_temp) {
+                if (temp.x < x) {
+                    temp = temp.next;
+                } else if (temp.x > x) {
+                    allXsmaller = false;
+                    index_floor = index_temp - 1;
+                    if (index_temp == 0) {
+                        index_floor = 0;
+                    }
+                    break;
+                } else {
+                    allXsmaller = false;
+                    index_floor = index_temp - 1;
+                    break;
                 }
-                break;
-            } else {
-                allXsmaller = false;
-                index_floor = index_temp-1;
-                break;
             }
+            if (allXsmaller) index_floor = count;
+        }catch(Exception e){
+            System.err.println(e.getMessage());
         }
-        if (allXsmaller) index_floor = count;
         return index_floor;
     }
 
@@ -176,17 +175,32 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
 
 
-    public double getX(int index) {
+    public double getX(int index){
+        try {
+            if((index > count) || (index < 0)) throw new Exception("IllegalArgumentException");
+        }catch(Exception e){
+            e.getMessage();
+        }
         return getNode(index).x;
     }
 
 
     public double getY(int index) {
+        try {
+            if((index > count) || (index < 0)) throw new Exception("IllegalArgumentException");
+        }catch(Exception e){
+            e.getMessage();
+        }
         return getNode(index).y;
     }
 
 
     public void setY(int index, double value) {
+        try {
+            if((index > count) || (index < 0)) throw new Exception("IllegalArgumentException");
+        }catch(Exception e){
+            e.getMessage();
+        }
         getNode(index).y = value;
     }
 
@@ -257,7 +271,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         return floorNode;
     }
 
-    public double apply(double x) {
+    public double apply(double x){
         if (x < leftBound())
             return extrapolateLeft(x);
         else if (x > rightBound())
@@ -299,19 +313,23 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     public void remove(int index) {
         Node currentNode = head;
+        try {
+            if((index>count)||(index < 0)) throw new Exception("IllegalArgumentException");
+            while (index-- != 0)
+                currentNode = currentNode.next;
 
-        while (index-- != 0)
-            currentNode = currentNode.next;
+            currentNode.prev.next = currentNode.next;
+            currentNode.next.prev = currentNode.prev;
+            --count;
 
-        currentNode.prev.next = currentNode.next;
-        currentNode.next.prev = currentNode.prev;
-        --count;
-
-        if (currentNode == head) {
-            if (count == 0)
-                head = null;
-            else
-                head = currentNode.next;
+            if (currentNode == head) {
+                if (count == 0)
+                    head = null;
+                else
+                    head = currentNode.next;
+            }
+        }catch(Exception e){
+            System.err.println(e.getMessage());
         }
 
 
