@@ -32,7 +32,6 @@ public class LinkedListTabulatedFunctionTest {
         Assertions.assertEquals(2, x4);
         Assertions.assertEquals(0, listTwo.floorIndexOfX(10));
         Assertions.assertEquals(1, listTwo.floorIndexOfX(15));
-        list.floorIndexOfX(-15);
     }
     @Test
     public void extrapolateLeft(){
@@ -48,7 +47,6 @@ public class LinkedListTabulatedFunctionTest {
         Assertions.assertEquals(9, test);
         double test1 = listOne.interpolate(3, 0);
         Assertions.assertEquals(3, test1);
-        list.extrapolateLeft(12);
     }
     @Test
     public void interpolate(){
@@ -56,7 +54,6 @@ public class LinkedListTabulatedFunctionTest {
         Assertions.assertEquals(6, test);
         double test1 = listOne.interpolate(3, 0);
         Assertions.assertEquals(3, test1);
-        list.interpolate(3, 15);
     }
 
     @Test
@@ -68,8 +65,14 @@ public class LinkedListTabulatedFunctionTest {
     public void getX(){
         double x = list.getX(1);
         Assertions.assertEquals(2, x);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testException() {
         list.getX(10);
-        list.getX(-5);
+        list.interpolate(2, -15);
+        list.floorIndexOfX(-1);
+        list.floorNodeOfX(-15);
+        LinkedListTabulatedFunction list = new LinkedListTabulatedFunction(x_one, y_one);
     }
     @Test
     public void getY() {
