@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions;
 
 import java.util.concurrent.ExecutionException;
 
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 public class LinkedListTabulatedFunctionTest {
     double[] xVal = {1,2,3,4};
     double[] yVal = {5,6,7,8};
@@ -14,6 +16,7 @@ public class LinkedListTabulatedFunctionTest {
 
     MathFunction sqrFunctions = new SqrFunctions();
     LinkedListTabulatedFunction listTwo = new LinkedListTabulatedFunction(sqrFunctions,0,100,10 );
+
 
     @Test
     public void floorIndexOfX(){
@@ -63,21 +66,32 @@ public class LinkedListTabulatedFunctionTest {
         double x = list.getX(1);
         Assertions.assertEquals(2, x);
     }
-
+    @Test(expected = IllegalArgumentException.class)
+    public void testException() {
+        list.getX(10);
+        list.interpolate(2, -15);
+        list.floorIndexOfX(-1);
+        list.floorNodeOfX(-15);
+        LinkedListTabulatedFunction list = new LinkedListTabulatedFunction(x_one, y_one);
+    }
     @Test
     public void getY() {
         double y = list.getY(1);
         Assertions.assertEquals(6, y);
+        list.getX(10);
+        list.getX(-5);
     }
     @Test
     public void SetY() {
         list.setY(3, 9);
         Assertions.assertEquals(9, list.getY(3));
+        list.setY(10, 15);
     }
     @Test
     public void indexOfX(){
         int index = list.indexOfX(4);
         Assertions.assertEquals(3, index);
+        Assertions.assertEquals(-1, list.indexOfX(15));
     }
     @Test
     public void indexOfY(){
@@ -140,6 +154,7 @@ public class LinkedListTabulatedFunctionTest {
         Assertions.assertEquals(8.0, list.getY(1));
         list.remove(list.getCount() - 1);
         Assertions.assertEquals(6.0, list.getY(list.getCount()- 1));
+        list.remove(-18);
     }
     @Test
     public void toStringNodeTest(){
@@ -152,7 +167,7 @@ public class LinkedListTabulatedFunctionTest {
         LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(3, 4);
         LinkedListTabulatedFunction.Node node3 = new LinkedListTabulatedFunction.Node(3, 7);
         Assertions.assertEquals(true, node2.equals(node));
-        Assertions.assertNotEquals(true, node3.equals(node2));
+        assertNotEquals(true, node3.equals(node2));
     }
 
     @Test
@@ -195,7 +210,7 @@ public class LinkedListTabulatedFunctionTest {
         LinkedListTabulatedFunction list2 = new LinkedListTabulatedFunction(xVal2,yVal2);
 
         Assertions.assertEquals(list1.hashCode(), list.hashCode());
-        Assertions.assertNotEquals(list2.hashCode(), list.hashCode());
+        assertNotEquals(list2.hashCode(), list.hashCode());
     }
     @Test
     public void cloneTest() throws CloneNotSupportedException {

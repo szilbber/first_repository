@@ -1,9 +1,9 @@
 package functions;
-
-
 import java.util.Objects;
 
+import java.util.logging.Logger;
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Insertable, Removable {
+    public static final Logger log = Logger.getLogger("functions.LinkedList,class");
     static class Node {
         public Node next;
         public Node prev;
@@ -48,9 +48,10 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     private Node head;
 
     private Node getNode(int index) {
-        //int index_temp = 0;
         Node i = head;
-        for (int index_temp = 0; index_temp != index; i = i.next, index_temp++) ;
+            if((index > count) || (index < 0)) throw new IllegalArgumentException();
+            for (int index_temp = 0; index_temp != index; i = i.next, index_temp++) ;
+
         return i;
     }
 
@@ -71,12 +72,13 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
 
     LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
+        if((xValues.length < 2) || (yValues.length<2)) log.info("The length is less than the minimum");
         for (int i = 0; i < xValues.length; i++) {
             addNode(xValues[i], yValues[i]);
         }
     }
 
-    LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
+    LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count){
         if (xFrom > xTo) {
             double temp = xTo;
             xTo = xFrom;
@@ -96,20 +98,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         }
         head.x = xFrom;
         head.prev.x = xTo;
-//        if (xFrom == xTo) {
-//            for (int i = 1; i < count; i++) {
-//                addNode(xFrom, source.apply(xFrom));
-//            }
-//        } else {
-//            for (int i = 1; i < count; i++) {
-//                addNode(xCordinate, source.apply(xCordinate));
-//                xCordinate += step;
-//            }
-//        }
     }
 
     protected int floorIndexOfX(double x) {
         int index_floor = 0;
+
+        if (x < head.x) log.config("IllegalArgumentException");
         boolean allXsmaller = true;
         Node temp = head;
         for (int index_temp = 0; index_temp != count; ++index_temp) {
@@ -124,11 +118,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
                 break;
             } else {
                 allXsmaller = false;
-                index_floor = index_temp-1;
+                index_floor = index_temp - 1;
                 break;
             }
         }
         if (allXsmaller) index_floor = count;
+
         return index_floor;
     }
 
@@ -159,15 +154,16 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
 
     protected double interpolate(double x, int floorIndex) {
-        if ((head.next == head) && (head.prev == head)) {
-            return x;
-        } else {
-            double leftY = getY(floorIndex);
-            double leftX = getX(floorIndex);
-            double rightY = getY(floorIndex + 1);
-            double rightX = getX(floorIndex + 1);
-            return interpolate(x, leftX, rightX, leftY, rightY);
-        }
+            if ((head.next == head) && (head.prev == head)) {
+                return x;
+            } else {
+                double leftY = getY(floorIndex);
+                double leftX = getX(floorIndex);
+                double rightY = getY(floorIndex + 1);
+                double rightX = getX(floorIndex + 1);
+                return interpolate(x, leftX, rightX, leftY, rightY);
+            }
+
     }
 
     //Получение количества табулированных значений
@@ -175,18 +171,28 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         return count;
     }
 
-
-    public double getX(int index) {
-        return getNode(index).x;
-    }
+public double getX(int index) throws IllegalArgumentException{
+    if ((index > count) || (index < 0)) throw new IllegalArgumentException();
+    return getNode(index).x;
+}
 
 
     public double getY(int index) {
+        try {
+            if((index > count) || (index < 0)) throw new Exception("IllegalArgumentException");
+        }catch(Exception e){
+            e.getMessage();
+        }
         return getNode(index).y;
     }
 
 
     public void setY(int index, double value) {
+        try {
+            if((index > count) || (index < 0)) throw new Exception("IllegalArgumentException");
+        }catch(Exception e){
+            e.getMessage();
+        }
         getNode(index).y = value;
     }
 
@@ -234,6 +240,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
 
     protected Node floorNodeOfX(double x) {
+        if (x < head.x) log.config("IllegalArgumentException");
         Node floorNode = head;
         boolean allXsmaller = true;
         Node temp = head;
@@ -257,7 +264,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         return floorNode;
     }
 
-    public double apply(double x) {
+    public double apply(double x){
         if (x < leftBound())
             return extrapolateLeft(x);
         else if (x > rightBound())
@@ -300,6 +307,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     public void remove(int index) {
         Node currentNode = head;
 
+        if ((index > count) || (index < 0)) ;
         while (index-- != 0)
             currentNode = currentNode.next;
 
