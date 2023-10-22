@@ -154,15 +154,16 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
 
     protected double interpolate(double x, int floorIndex) {
-        if ((head.next == head) && (head.prev == head)) {
-            return x;
-        } else {
-            double leftY = getY(floorIndex);
-            double leftX = getX(floorIndex);
-            double rightY = getY(floorIndex + 1);
-            double rightX = getX(floorIndex + 1);
-            return interpolate(x, leftX, rightX, leftY, rightY);
-        }
+            if ((head.next == head) && (head.prev == head)) {
+                return x;
+            } else {
+                double leftY = getY(floorIndex);
+                double leftX = getX(floorIndex);
+                double rightY = getY(floorIndex + 1);
+                double rightX = getX(floorIndex + 1);
+                return interpolate(x, leftX, rightX, leftY, rightY);
+            }
+
     }
 
     //Получение количества табулированных значений
@@ -170,17 +171,8 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         return count;
     }
 
-
-//    public double getX(int index){
-//        try {
-//            if((index > count) || (index < 0)) throw new Exception("IllegalArgumentException");
-//        }catch(Exception e){
-//            e.printStackTrace();
-//        }
-//        return getNode(index).x;
-//    }
-public double getX(int index) {
-    if ((index > count) || (index < 0)) log.config("IllegalArgumentException");
+public double getX(int index) throws IllegalArgumentException{
+    if ((index > count) || (index < 0)) throw new IllegalArgumentException();
     return getNode(index).x;
 }
 
