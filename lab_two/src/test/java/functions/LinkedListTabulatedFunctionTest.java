@@ -1,4 +1,5 @@
 package functions;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
@@ -193,15 +194,21 @@ public class LinkedListTabulatedFunctionTest {
     @Test
     public void iteratorTest1() {
         Iterator<Point> iterator = list.iterator();
+        int index = 0;
         while (iterator.hasNext()) {
             Point point = iterator.next();
-            System.out.println(point);
+            Assertions.assertEquals(point.x, list.getX(index));
+            Assertions.assertEquals(point.y, list.getY(index));
+            index++;
         }
     }
     @Test
     public void iteratorTest2() {
+        int index = 0;
         for(Point point : list){
-            System.out.println(point);
+            Assertions.assertEquals(point.x, list.getX(index));
+            Assertions.assertEquals(point.y, list.getY(index));
+            index++;
         }
     }
 }
