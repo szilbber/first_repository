@@ -2,6 +2,8 @@ package functions;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
+import java.awt.*;
+import java.util.Iterator;
 import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -10,9 +12,6 @@ public class LinkedListTabulatedFunctionTest {
     double[] xVal = {1,2,3,4};
     double[] yVal = {5,6,7,8};
     LinkedListTabulatedFunction list = new LinkedListTabulatedFunction(xVal,yVal);
-    double[] x_one = {3};
-    double[] y_one = {4};
-    LinkedListTabulatedFunction listOne = new LinkedListTabulatedFunction(x_one,y_one);
 
     MathFunction sqrFunctions = new SqrFunctions();
     LinkedListTabulatedFunction listTwo = new LinkedListTabulatedFunction(sqrFunctions,0,100,10 );
@@ -22,10 +21,6 @@ public class LinkedListTabulatedFunctionTest {
     public void floorIndexOfX(){
         double x = list.floorIndexOfX(3);
         Assertions.assertEquals(1, x);
-        double x1 = list.floorIndexOfX(5);
-        Assertions.assertEquals(4, x1);
-        double x2 = list.floorIndexOfX(-1);
-        Assertions.assertEquals(0, x2);
         double x3 = list.floorIndexOfX(3.5);
         Assertions.assertEquals(2, x3);
         double x4 = list.floorIndexOfX(4);
@@ -37,23 +32,17 @@ public class LinkedListTabulatedFunctionTest {
     public void extrapolateLeft(){
         double test = list.extrapolateLeft(-1);
         Assertions.assertEquals(3, test);
-        double test1 = listOne.extrapolateLeft(3);
-        Assertions.assertEquals(3, test1);
 
     }
     @Test
     public void extrapolateRight(){
         double test = list.extrapolateLeft(5);
         Assertions.assertEquals(9, test);
-        double test1 = listOne.interpolate(3, 0);
-        Assertions.assertEquals(3, test1);
     }
     @Test
     public void interpolate(){
         double test = list.interpolate(2, 0);
         Assertions.assertEquals(6, test);
-        double test1 = listOne.interpolate(3, 0);
-        Assertions.assertEquals(3, test1);
     }
 
     @Test
@@ -66,26 +55,15 @@ public class LinkedListTabulatedFunctionTest {
         double x = list.getX(1);
         Assertions.assertEquals(2, x);
     }
-    @Test(expected = IllegalArgumentException.class)
-    public void testException() {
-        list.getX(10);
-        list.interpolate(2, -15);
-        list.floorIndexOfX(-1);
-        list.floorNodeOfX(-15);
-        LinkedListTabulatedFunction list = new LinkedListTabulatedFunction(x_one, y_one);
-    }
     @Test
     public void getY() {
         double y = list.getY(1);
         Assertions.assertEquals(6, y);
-        list.getX(10);
-        list.getX(-5);
     }
     @Test
     public void SetY() {
         list.setY(3, 9);
         Assertions.assertEquals(9, list.getY(3));
-        list.setY(10, 15);
     }
     @Test
     public void indexOfX(){
@@ -112,10 +90,6 @@ public class LinkedListTabulatedFunctionTest {
     @Test
     public void floorNodeOfX(){
         Assertions.assertEquals(3, list.floorNodeOfX(3).x);
-
-        Assertions.assertEquals(4, list.floorNodeOfX(5).x);
-
-        Assertions.assertEquals(1, list.floorNodeOfX(-1).x);
 
         Assertions.assertEquals(3, list.floorNodeOfX(3.5).x);
 
@@ -154,7 +128,6 @@ public class LinkedListTabulatedFunctionTest {
         Assertions.assertEquals(8.0, list.getY(1));
         list.remove(list.getCount() - 1);
         Assertions.assertEquals(6.0, list.getY(list.getCount()- 1));
-        list.remove(-18);
     }
     @Test
     public void toStringNodeTest(){
@@ -215,5 +188,20 @@ public class LinkedListTabulatedFunctionTest {
     @Test
     public void cloneTest() throws CloneNotSupportedException {
         Assertions.assertEquals(list, list.clone());
+    }
+
+    @Test
+    public void iteratorTest1() {
+        Iterator<Point> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            System.out.println(point);
+        }
+    }
+    @Test
+    public void iteratorTest2() {
+        for(Point point : list){
+            System.out.println(point);
+        }
     }
 }

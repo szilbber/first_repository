@@ -1,8 +1,15 @@
 package functions;
 
+import java.awt.*;
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
+    @Override
+    public Iterator<Point> iterator() throws UnsupportedOperationException{
+        throw new UnsupportedOperationException();
+    }
+
     private final double[] xValues;
     private final double[] yValues;
 
@@ -134,6 +141,4 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
         return new ArrayTabulatedFunction(clonedXValues, clonedYValues);
     }
-
-
 }
