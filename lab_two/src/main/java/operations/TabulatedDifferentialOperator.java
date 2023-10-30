@@ -8,9 +8,8 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
     TabulatedFunctionFactory factory;
 
     TabulatedDifferentialOperator(TabulatedFunctionFactory factory){
-
+        this.factory = factory;
     }
-
     TabulatedDifferentialOperator(){
         factory = new ArrayTabulatedFunctionFactory();
     }
@@ -22,12 +21,6 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
     public void setFactory(TabulatedFunctionFactory factory) {
         this.factory = factory;
     }
-
-    @Override
-    public double apply(double x) {
-        return 0;
-    }
-
     @Override
     public TabulatedFunction derive(TabulatedFunction function) {
 
@@ -39,10 +32,10 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
         while(index != size-1){
             xValues[index] = points[index].x;
             yValues[index] = (points[index+1].y - points[index].y)/(points[index+1].x - points[index].x);
+            index++;
         }
         xValues[size-1] = points[size-2].x;
         yValues[size-1] = yValues[size-2];
         return factory.create(xValues, yValues);
     }
-
 }
