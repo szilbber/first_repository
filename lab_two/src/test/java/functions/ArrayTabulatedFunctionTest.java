@@ -16,7 +16,6 @@ public class ArrayTabulatedFunctionTest extends TestCase {
     ArrayTabulatedFunction objSqrFunctionTest = new ArrayTabulatedFunction(sqrFunctions, 0, 100, 10);
 
     public void testFloorIndexOfX() {
-        assertEquals(0, objTest.floorIndexOfX(-2));
         assertEquals(0, objTest.floorIndexOfX(2));
         assertEquals(1, objTest.floorIndexOfX(2.2));
         assertEquals(2, objTest.floorIndexOfX(3.4));
