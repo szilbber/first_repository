@@ -31,19 +31,18 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
     @Override
     public TabulatedFunction derive(TabulatedFunction function) {
 
-//        Point[] points = TabulatedFunctionOperationService.asPoints(function);
-//        int size = points.length;
-//        double xValues [] = new double[size];
-//        double yValues [] = new double[size];
-//        int index = 0;
-//        while(index != size-1){
-//            xValues[index] = points[index].x;
-//            yValues[index] = (points[index+1].y - points[index].y)/(points[index+1].x - points[index].x);
-//        }
-//        xValues[size-1] = points[size-2].x;
-//        yValues[size-1] = yValues[size-2];
-//        return factory.create(xValues, yValues);
-        return function;
+        Point[] points = TabulatedFunctionOperationService.asPoints(function);
+        int size = points.length;
+        double xValues [] = new double[size];
+        double yValues [] = new double[size];
+        int index = 0;
+        while(index != size-1){
+            xValues[index] = points[index].x;
+            yValues[index] = (points[index+1].y - points[index].y)/(points[index+1].x - points[index].x);
+        }
+        xValues[size-1] = points[size-2].x;
+        yValues[size-1] = yValues[size-2];
+        return factory.create(xValues, yValues);
     }
 
 }
