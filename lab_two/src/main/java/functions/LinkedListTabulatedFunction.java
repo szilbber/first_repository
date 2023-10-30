@@ -1,6 +1,8 @@
 package functions;
 
-import java.awt.*;
+import exceptions.DifferentLengthOfArraysException;
+import exceptions.InterpolationException;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -98,11 +100,14 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues){
-        if ((xValues.length < 2) || (yValues.length < 2))
+        checkLengthIsTheSame(xValues, yValues);
+        checkSorted(xValues);
+
+        if (xValues.length < 2)
             throw new IllegalArgumentException("Длина меньше минимальной");
-        for (int i = 0; i < xValues.length; i++) {
+
+        for (int i = 0; i < xValues.length; i++)
             addNode(xValues[i], yValues[i]);
-        }
     }
 
     LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
@@ -175,13 +180,14 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
 
     protected double interpolate(double x, int floorIndex) throws IllegalArgumentException {
+        if (getX(floorIndex) >= x)
+            throw new InterpolationException("Range error for interpolation");
 
         double leftY = getY(floorIndex);
         double leftX = getX(floorIndex);
         double rightY = getY(floorIndex + 1);
         double rightX = getX(floorIndex + 1);
         return interpolate(x, leftX, rightX, leftY, rightY);
-
     }
 
     //Получение количества табулированных значений
@@ -372,13 +378,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
-        double xCloneValues[] = new double[count];
-        double yCloneValues[] = new double[count];
+        double[] xCloneValues = new double[count];
+        double[] yCloneValues = new double[count];
         for (int i = 0; i != count; i++) {
             xCloneValues[i] = this.getX(i);
             yCloneValues[i] = this.getY(i);
         }
-        LinkedListTabulatedFunction cloneList = new LinkedListTabulatedFunction(xCloneValues, yCloneValues);
-        return cloneList;
+        return new LinkedListTabulatedFunction(xCloneValues, yCloneValues);
     }
 }

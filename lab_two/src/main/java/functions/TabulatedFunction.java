@@ -1,5 +1,7 @@
 package functions;
 
+import exceptions.DifferentLengthOfArraysException;
+
 public interface TabulatedFunction extends MathFunction, Iterable<Point>{
     int getCount();
     double getX(int index);
@@ -9,5 +11,4 @@ public interface TabulatedFunction extends MathFunction, Iterable<Point>{
     int indexOfY(double y);
     double leftBound();
     double rightBound();
-
 }

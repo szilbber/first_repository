@@ -2,6 +2,10 @@ package functions;
 
 import junit.framework.TestCase;
 
+import java.util.Iterator;
+
+import static org.junit.Assert.assertNotEquals;
+
 public class ArrayTabulatedFunctionTest extends TestCase {
     double[] xValue = {1, 2, 3, 4, 5};
     double[] yValue = {2, 4, 6, 8, 10};
@@ -108,7 +112,7 @@ public class ArrayTabulatedFunctionTest extends TestCase {
         double[] differentYValues = {2, 4, 6, 8, 12};
         ArrayTabulatedFunction objTestDifferent = new ArrayTabulatedFunction(differentXValues, differentYValues);
 
-        assertFalse(objTest.equals(objTestDifferent));
+        assertNotEquals(objTest, objTestDifferent);
     }
 
     public void testClone() {
@@ -116,6 +120,35 @@ public class ArrayTabulatedFunctionTest extends TestCase {
 
         assertNotSame(objTest, clonedFunction);
         assertEquals(objTest, clonedFunction);
-        assertFalse(objTest.equals(sqrFunctions));
+        assertNotEquals(objTest, sqrFunctions);
+    }
+
+    public void testIteratorWithForEachLoop() {
+        double[] xValues = {1.0, 2.0, 3.0};
+        double[] yValues = {10.0, 20.0, 30.0};
+        ArrayTabulatedFunction tabulatedFunction = new ArrayTabulatedFunction(xValues, yValues);
+
+        int i = 0;
+        for (Point point : tabulatedFunction) {
+            assertEquals(xValues[i], point.x, 0.0001);
+            assertEquals(yValues[i], point.y, 0.0001);
+            i++;
+        }
+    }
+
+    public void testIteratorWithWhileLoop() {
+        double[] xValues = {1.0, 2.0, 3.0};
+        double[] yValues = {10.0, 20.0, 30.0};
+        ArrayTabulatedFunction tabulatedFunction = new ArrayTabulatedFunction(xValues, yValues);
+
+        Iterator<Point> iterator = tabulatedFunction.iterator();
+
+        int i = 0;
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            assertEquals(xValues[i], point.x, 0.0001);
+            assertEquals(yValues[i], point.y, 0.0001);
+            i++;
+        }
     }
 }
