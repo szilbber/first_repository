@@ -1,28 +1,31 @@
 package functions;
 
-import java.awt.*;
+import exceptions.*;
+
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
-    @Override
-    public Iterator<Point> iterator() throws UnsupportedOperationException{
-        throw new UnsupportedOperationException();
-    }
-
     private final double[] xValues;
     private final double[] yValues;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
+        checkLengthIsTheSame(xValues, yValues);
+        checkSorted(xValues);
+
         if (xValues.length < 2)
             throw new IllegalArgumentException("Длина меньше минимальной");
+
         this.xValues = Arrays.copyOf(xValues, xValues.length);
         this.yValues = Arrays.copyOf(yValues, yValues.length);
         count = xValues.length;
     }
 
-    ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
-        if (count < 2) throw new IllegalArgumentException("Длина меньше минимальной");
+    public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
+        if (count < 2)
+            throw new IllegalArgumentException("Длина меньше минимальной");
+
         if (xFrom > xTo) {
             double temp = xFrom;
             xFrom = xTo;
@@ -44,14 +47,13 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     protected int floorIndexOfX(double x) {
-        if (x < xValues[0]) throw new IllegalArgumentException("х меньше левой границы");
         int index = 0;
         while (index < count && xValues[index] < x) ++index;
         return (index == count || index == 0) ? index : --index;
     }
 
     protected double extrapolateLeft(double x) {
-        return interpolate(x, 0);
+        return interpolate(x, getX(0), getX(1), getY(0), getY(1));
     }
 
     protected double extrapolateRight(double x) {
@@ -59,10 +61,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     protected double interpolate(double x, int floorIndex) {
-        if (count == 1)
-            return yValues[0];
-        else
-            return interpolate(x, getX(floorIndex), getX(floorIndex + 1), getY(floorIndex), getY(floorIndex + 1));
+        if (getX(floorIndex) >= x)
+            throw new InterpolationException("Range error for interpolation");
+        return interpolate(x, getX(floorIndex), getX(floorIndex + 1), getY(floorIndex), getY(floorIndex + 1));
     }
 
     public int getCount() {
@@ -70,23 +71,14 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     public double getX(int index) {
-        if (index < 0 || index >= count) {
-            throw new IllegalArgumentException("Некорректный индекс: " + index);
-        }
         return xValues[index];
     }
 
     public double getY(int index) {
-        if (index < 0 || index >= count) {
-            throw new IllegalArgumentException("Некорректный индекс: " + index);
-        }
         return yValues[index];
     }
 
     public void setY(int index, double value) {
-        if (index < 0 || index >= count) {
-            throw new IllegalArgumentException("Некорректный индекс: " + index);
-        }
         yValues[index] = value;
     }
 
@@ -153,5 +145,28 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         double[] clonedYValues = Arrays.copyOf(yValues, yValues.length);
 
         return new ArrayTabulatedFunction(clonedXValues, clonedYValues);
+    }
+
+
+    @Override
+    public Iterator<Point> iterator() {
+        return new Iterator<Point>() {
+            private int currentIndex = 0;
+
+            @Override
+            public boolean hasNext() {
+                return currentIndex < xValues.length;
+            }
+
+            @Override
+            public Point next() {
+                if (!hasNext())
+                    throw new NoSuchElementException("No more elements to iterate");
+
+                Point point = new Point(xValues[currentIndex], yValues[currentIndex]);
+                currentIndex++;
+                return point;
+            }
+        };
     }
 }
