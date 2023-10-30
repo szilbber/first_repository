@@ -46,6 +46,4 @@ public class TabulatedDifferentialOperatorTest {
         Assertions.assertEquals(2, function.getY(3));
         Assertions.assertEquals(2, function.getY(4));
     }
-
-
 }

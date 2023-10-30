@@ -52,6 +52,7 @@ public class TabulatedFunctionOperationService {
 
         Point[] pointsA = asPoints(a);
         Point[] pointsB = asPoints(b);
+
         double[] xValues = new double[sizeA];
         double[] yValues = new double[sizeA];
 

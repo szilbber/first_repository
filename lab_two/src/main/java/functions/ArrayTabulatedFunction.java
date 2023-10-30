@@ -3,17 +3,19 @@ package functions;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
+    @Override
+    public Iterator<Point> iterator() throws UnsupportedOperationException{
+        throw new UnsupportedOperationException();
+    }
 
     private final double[] xValues;
     private final double[] yValues;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
-        checkSorted(xValues);
-        checkLengthIsTheSame(xValues, yValues);
-        if (xValues.length < 2) throw new IllegalArgumentException("Длина меньше минимальной");
+        if (xValues.length < 2)
+            throw new IllegalArgumentException("Длина меньше минимальной");
         this.xValues = Arrays.copyOf(xValues, xValues.length);
         this.yValues = Arrays.copyOf(yValues, yValues.length);
         count = xValues.length;
@@ -151,23 +153,5 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         double[] clonedYValues = Arrays.copyOf(yValues, yValues.length);
 
         return new ArrayTabulatedFunction(clonedXValues, clonedYValues);
-    }
-
-    @Override
-    public Iterator<Point> iterator() {
-        return new Iterator<Point>() {
-            private int currentIndex = 0;
-            @Override
-            public boolean hasNext() {
-                return currentIndex < xValues.length;
-            }
-            @Override
-            public Point next() {
-                if (!hasNext()) throw new NoSuchElementException("No more elements to iterate");
-                Point point = new Point(xValues[currentIndex], yValues[currentIndex]);
-                currentIndex++;
-                return point;
-            }
-        };
     }
 }
