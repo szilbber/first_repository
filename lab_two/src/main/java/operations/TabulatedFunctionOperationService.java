@@ -73,4 +73,11 @@ public class TabulatedFunctionOperationService {
     public TabulatedFunction subtract(TabulatedFunction a, TabulatedFunction b) {
         return doOperation(a, b, (x, y) -> x - y);
     }
+
+    public TabulatedFunction multiplication(TabulatedFunction a, TabulatedFunction b) {
+        return doOperation(a, b, (x, y) -> x * y);
+    }
+    public TabulatedFunction division(TabulatedFunction a, TabulatedFunction b) {
+        return doOperation(a, b, (x, y) -> x / y);
+    }
 }
