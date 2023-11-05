@@ -1,19 +1,18 @@
 package functions;
 
-import java.awt.*;
+import exceptions.InterpolationException;
+
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
-    @Override
-    public Iterator<Point> iterator() throws UnsupportedOperationException{
-        throw new UnsupportedOperationException();
-    }
-
     private final double[] xValues;
     private final double[] yValues;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
+        checkLengthIsTheSame(xValues, yValues);
+        checkSorted(xValues);
         if (xValues.length < 2)
             throw new IllegalArgumentException("Длина меньше минимальной");
         this.xValues = Arrays.copyOf(xValues, xValues.length);
@@ -51,7 +50,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     protected double extrapolateLeft(double x) {
-        return interpolate(x, 0);
+        return interpolate(x, getX(0), getX(1), getY(0), getY(1));
     }
 
     protected double extrapolateRight(double x) {
@@ -59,10 +58,9 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     protected double interpolate(double x, int floorIndex) {
-        if (count == 1)
-            return yValues[0];
-        else
-            return interpolate(x, getX(floorIndex), getX(floorIndex + 1), getY(floorIndex), getY(floorIndex + 1));
+        if (getX(floorIndex) >= x)
+            throw new InterpolationException("Range error for interpolation");
+        return interpolate(x, getX(floorIndex), getX(floorIndex + 1), getY(floorIndex), getY(floorIndex + 1));
     }
 
     public int getCount() {
@@ -153,5 +151,26 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         double[] clonedYValues = Arrays.copyOf(yValues, yValues.length);
 
         return new ArrayTabulatedFunction(clonedXValues, clonedYValues);
+    }
+    @Override
+    public Iterator<Point> iterator() {
+        return new Iterator<Point>() {
+            private int currentIndex = 0;
+
+            @Override
+            public boolean hasNext() {
+                return currentIndex < xValues.length;
+            }
+
+            @Override
+            public Point next() {
+                if (!hasNext())
+                    throw new NoSuchElementException("No more elements to iterate");
+
+                Point point = new Point(xValues[currentIndex], yValues[currentIndex]);
+                currentIndex++;
+                return point;
+            }
+        };
     }
 }
