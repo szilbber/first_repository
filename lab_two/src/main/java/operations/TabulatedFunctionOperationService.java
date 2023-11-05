@@ -14,7 +14,6 @@ public class TabulatedFunctionOperationService {
     }
 
     public TabulatedFunctionOperationService() {
-        // Инициализация factory объектом ArrayTabulatedFunctionFactory по умолчанию
         this.factory = new ArrayTabulatedFunctionFactory();
     }
 
@@ -43,7 +42,7 @@ public class TabulatedFunctionOperationService {
         double apply(double u, double v);
     }
 
-    public TabulatedFunction doOperation(TabulatedFunction a, TabulatedFunction b, BiOperation operation) {
+    private TabulatedFunction doOperation(TabulatedFunction a, TabulatedFunction b, BiOperation operation) {
         int sizeA = a.getCount();
         int sizeB = b.getCount();
 

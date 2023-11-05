@@ -4,11 +4,8 @@ import functions.ArrayTabulatedFunction;
 import functions.LinkedListTabulatedFunction;
 import functions.TabulatedFunction;
 import functions.factory.LinkedListTabulatedFunctionFactory;
-import functions.factory.TabulatedFunctionFactory;
 import org.junit.Test;
 
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Assertions;
 
 public class TabulatedDifferentialOperatorTest {

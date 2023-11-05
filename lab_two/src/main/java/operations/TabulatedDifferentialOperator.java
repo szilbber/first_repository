@@ -26,8 +26,8 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
 
         Point[] points = TabulatedFunctionOperationService.asPoints(function);
         int size = points.length;
-        double xValues [] = new double[size];
-        double yValues [] = new double[size];
+        double[] xValues = new double[size];
+        double[] yValues = new double[size];
         int index = 0;
         while(index != size-1){
             xValues[index] = points[index].x;

@@ -13,8 +13,10 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
         checkLengthIsTheSame(xValues, yValues);
         checkSorted(xValues);
+
         if (xValues.length < 2)
             throw new IllegalArgumentException("Длина меньше минимальной");
+
         this.xValues = Arrays.copyOf(xValues, xValues.length);
         this.yValues = Arrays.copyOf(yValues, yValues.length);
         count = xValues.length;
@@ -33,17 +35,19 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         this.count = count;
 
         double step = (xFrom + xTo) / (count - 1);
-        double xCordinate = xFrom;
+        double xCoordinate = xFrom;
 
         for (int i = 0; i < count; i++) {
-            xValues[i] = xCordinate;
-            yValues[i] = source.apply(xCordinate);
-            xCordinate += step;
+            xValues[i] = xCoordinate;
+            yValues[i] = source.apply(xCoordinate);
+            xCoordinate += step;
         }
     }
 
     protected int floorIndexOfX(double x) {
-        if (x < xValues[0]) throw new IllegalArgumentException("х меньше левой границы");
+        if (x < xValues[0])
+            throw new IllegalArgumentException("х меньше левой границы");
+
         int index = 0;
         while (index < count && xValues[index] < x) ++index;
         return (index == count || index == 0) ? index : --index;
@@ -60,6 +64,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     protected double interpolate(double x, int floorIndex) {
         if (getX(floorIndex) >= x)
             throw new InterpolationException("Range error for interpolation");
+
         return interpolate(x, getX(floorIndex), getX(floorIndex + 1), getY(floorIndex), getY(floorIndex + 1));
     }
 
@@ -68,23 +73,23 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
     }
 
     public double getX(int index) {
-        if (index < 0 || index >= count) {
+        if (index < 0 || index >= count)
             throw new IllegalArgumentException("Некорректный индекс: " + index);
-        }
+
         return xValues[index];
     }
 
     public double getY(int index) {
-        if (index < 0 || index >= count) {
+        if (index < 0 || index >= count)
             throw new IllegalArgumentException("Некорректный индекс: " + index);
-        }
+
         return yValues[index];
     }
 
     public void setY(int index, double value) {
-        if (index < 0 || index >= count) {
+        if (index < 0 || index >= count)
             throw new IllegalArgumentException("Некорректный индекс: " + index);
-        }
+
         yValues[index] = value;
     }
 
@@ -152,6 +157,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
 
         return new ArrayTabulatedFunction(clonedXValues, clonedYValues);
     }
+
     @Override
     public Iterator<Point> iterator() {
         return new Iterator<Point>() {
