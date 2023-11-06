@@ -17,7 +17,6 @@ public class TabulatedFunctionFileReader {
                  BufferedReader linkedListReader = new BufferedReader(new FileReader("input/function.txt"))) {
                 TabulatedFunction arrayFunction = FunctionsIO.readTabulatedFunction(arrayReader, new ArrayTabulatedFunctionFactory());
                 TabulatedFunction linkedListFunction = FunctionsIO.readTabulatedFunction(linkedListReader, new LinkedListTabulatedFunctionFactory());
-                arrayFunction = FunctionsIO.readTabulatedFunction(arrayReader, new ArrayTabulatedFunctionFactory());
 
                 System.out.println("Array function:");
                 System.out.println(arrayFunction);
