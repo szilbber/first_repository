@@ -4,10 +4,7 @@ import functions.Point;
 import functions.TabulatedFunction;
 import functions.factory.TabulatedFunctionFactory;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
@@ -71,8 +68,7 @@ public final class FunctionsIO {
 
     public static TabulatedFunction deserialize(BufferedInputStream stream) throws IOException, ClassNotFoundException {
         ObjectInputStream input = new ObjectInputStream(stream);
-        TabulatedFunction function = (TabulatedFunction) input.readObject();
-        return function;
+        return (TabulatedFunction) input.readObject();
     }
 
     public static void serialize(BufferedOutputStream stream, TabulatedFunction function) throws IOException {
