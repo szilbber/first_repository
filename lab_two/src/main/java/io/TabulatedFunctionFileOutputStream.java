@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class TabulatedFunctionFileOutputStream {
     public static void main(String[] args){
-        try{
+
             try (BufferedOutputStream arrayFileOutputStream = new BufferedOutputStream(new FileOutputStream("output/array function.bin"));
                  BufferedOutputStream LinkedListFileOutputStream = new BufferedOutputStream(new FileOutputStream("output/linked list function.bin"))){
                 double[] xValue = {1, 2, 3, 4};
@@ -23,8 +23,7 @@ public class TabulatedFunctionFileOutputStream {
                 FunctionsIO.writeTabulatedFunction(arrayFileOutputStream, arrayFunction);
                 FunctionsIO.writeTabulatedFunction(LinkedListFileOutputStream, linkedListFunction);
 
-            }
-        } catch (IOException e) {
+            } catch (IOException e) {
             e.printStackTrace();
         }
     }
