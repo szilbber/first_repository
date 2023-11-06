@@ -172,10 +172,10 @@ public class LinkedListTabulatedFunctionTest {
         Assertions.assertEquals(node, node.clone());
     }
 
-    @Test
-    public void toStringTest() {
-        Assertions.assertEquals("(1.0;5.0) (2.0;6.0) (3.0;7.0) (4.0;8.0) ", list.toString());
-    }
+//    @Test
+//    public void toStringTest() {
+//        Assertions.assertEquals("(1.0;5.0) (2.0;6.0) (3.0;7.0) (4.0;8.0) ", list.toString());
+//    }
 
     @Test
     public void equalsTest() {
@@ -229,5 +229,10 @@ public class LinkedListTabulatedFunctionTest {
             Assertions.assertEquals(point.y, list.getY(index));
             index++;
         }
+    }
+
+    @Test
+    public void toString2Test(){
+        Assertions.assertEquals(list.toString(), "LinkedListTabulatedFunction size = 4\n[1.0; 5.0]\n[2.0; 6.0]\n[3.0; 7.0]\n[4.0; 8.0]\n");
     }
 }

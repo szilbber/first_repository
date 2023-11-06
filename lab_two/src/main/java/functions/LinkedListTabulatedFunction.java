@@ -345,15 +345,15 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         count--;
     }
 
-    @Override
-    public String toString() {
-
-        String stringArray = "";
-        for(int i = 0; i!=count; i++ ){
-            stringArray += ("(" + getX(i) + ";" + getY(i) + ") ");
-        }
-        return stringArray;
-    }
+//    @Override
+//    public String toString() {
+//
+//        String stringArray = "";
+//        for(int i = 0; i!=count; i++ ){
+//            stringArray += ("(" + getX(i) + ";" + getY(i) + ") ");
+//        }
+//        return stringArray;
+//    }
 
     @Override
     public boolean equals(Object o) {

@@ -6,6 +6,24 @@ import exceptions.DifferentLengthOfArraysException;
 public abstract class AbstractTabulatedFunction implements TabulatedFunction {
 
     protected int count;
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.getClass().getSimpleName());
+        sb.append(" size = ");
+        sb.append(count);
+        sb.append("\n");
+        for(Point point: this){
+            sb.append("[");
+            sb.append(point.x);
+            sb.append("; ");
+            sb.append(point.y);
+            sb.append("]\n");
+        }
+        return sb.toString();
+    }
+
     abstract protected int floorIndexOfX(double x);
 
     abstract protected double extrapolateLeft(double x);

@@ -142,13 +142,13 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction {
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "ArrayTabulatedFunction{" +
-                "xValues=" + Arrays.toString(xValues) +
-                ", yValues=" + Arrays.toString(yValues) +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "ArrayTabulatedFunction{" +
+//                "xValues=" + Arrays.toString(xValues) +
+//                ", yValues=" + Arrays.toString(yValues) +
+//                '}';
+//    }
 
     @Override
     public ArrayTabulatedFunction clone() {
