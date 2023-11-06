@@ -4,10 +4,7 @@ import functions.Point;
 import functions.TabulatedFunction;
 import functions.factory.TabulatedFunctionFactory;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
@@ -44,6 +41,28 @@ public final class FunctionsIO {
             }
         }
 
+        return factory.create(xValues, yValues);
+    }
+
+    public static void writeTabulatedFunction(BufferedOutputStream outputStream, TabulatedFunction function) throws IOException {
+        DataOutputStream out = new DataOutputStream(outputStream);
+        out.writeInt(function.getCount());
+        for(Point point : function){
+            out.writeDouble(point.x);
+            out.writeDouble(point.y);
+        }
+        out.flush();
+    }
+
+    public static TabulatedFunction readTabulatedFunction(BufferedInputStream inputStream, TabulatedFunctionFactory factory) throws IOException {
+        DataInputStream in = new DataInputStream(inputStream);
+        int count = in.readInt();
+        double [] xValues = new double[count];
+        double [] yValues = new double[count];
+        for(int index=0; index!=count;index++){
+            xValues[index] = in.readDouble();
+            yValues[index] = in.readDouble();
+        }
         return factory.create(xValues, yValues);
     }
 }

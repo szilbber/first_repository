@@ -5,7 +5,7 @@ import functions.LinkedListTabulatedFunction;
 import functions.TabulatedFunction;
 import java.io.*;
 
-public class TabulatedFunctionFileWriter {
+public class TabulatedFunctionFileWriter{
     public static void main(String[] args){
         try {
             try (BufferedWriter arrayWriter = new BufferedWriter(new FileWriter("output/array function.txt"));
