@@ -115,21 +115,23 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         }
     }
 
-    LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
+    public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
         if (count < 2) throw new IllegalArgumentException("Длина меньше минимальной");
         if (xFrom > xTo) {
             double temp = xTo;
             xTo = xFrom;
             xFrom = temp;
         }
+
         double step = (xTo - xFrom) / (count - 1);
         double xCordinate = xFrom;
+
         if (xFrom == xTo) {
-            for (int i = 1; i < count; i++) {
+            for (int i = 0; i < count; i++) {
                 addNode(xFrom, source.apply(xFrom));
             }
         } else {
-            for (int i = 1; i < count; i++) {
+            for (int i = 0; i < count; i++) {
                 addNode(xCordinate, source.apply(xCordinate));
                 xCordinate += step;
             }
