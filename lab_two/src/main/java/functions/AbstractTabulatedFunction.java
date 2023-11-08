@@ -3,18 +3,20 @@ package functions;
 import exceptions.ArrayIsNotSortedException;
 import exceptions.DifferentLengthOfArraysException;
 
-public abstract class AbstractTabulatedFunction implements TabulatedFunction {
+import java.io.Serializable;
+
+public abstract class AbstractTabulatedFunction implements TabulatedFunction, Serializable {
 
     protected int count;
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.getClass().getSimpleName());
+        sb.append(getClass().getSimpleName());
         sb.append(" size = ");
-        sb.append(count);
+        sb.append(getCount());
         sb.append("\n");
-        for(Point point: this){
+        for (Point point : this) {
             sb.append("[");
             sb.append(point.x);
             sb.append("; ");
@@ -36,10 +38,12 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction {
         return leftY + (rightY - leftY) / (rightX - leftX) * (x - leftX);
     }
 
-    static void checkLengthIsTheSame(double[] xValues, double[] yValues){
+    static void checkLengthIsTheSame(double[] xValues, double[] yValues) {
         if (xValues.length != yValues.length)
             throw new DifferentLengthOfArraysException("The lengths of the xValues and yValues arrays are different");
-    };
+    }
+
+    ;
 
     static void checkSorted(double[] xValues) {
         for (int i = 1; i < xValues.length; i++)

@@ -28,14 +28,14 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
         int size = points.length;
         double[] xValues = new double[size];
         double[] yValues = new double[size];
-        int index = 0;
-        while(index != size-1){
-            xValues[index] = points[index].x;
-            yValues[index] = (points[index+1].y - points[index].y)/(points[index+1].x - points[index].x);
-            index++;
+        int i = 0;
+        while(i != size-1){
+            xValues[i] = points[i].x;
+            yValues[i] = (points[i+1].y - points[i].y)/(points[i+1].x - points[i].x);
+            i++;
         }
-        xValues[size-1] = points[size-2].x;
-        yValues[size-1] = yValues[size-2];
+        xValues[i] = points[i].x;
+        yValues[i] = yValues[i-1];
         return factory.create(xValues, yValues);
     }
 }
