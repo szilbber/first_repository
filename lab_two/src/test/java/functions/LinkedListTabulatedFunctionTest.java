@@ -1,12 +1,9 @@
 package functions;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
-import java.awt.*;
 import java.util.Iterator;
-import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -155,7 +152,7 @@ public class LinkedListTabulatedFunctionTest {
         LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(3, 4);
         LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(3, 4);
         LinkedListTabulatedFunction.Node node3 = new LinkedListTabulatedFunction.Node(3, 7);
-        Assertions.assertEquals(true, node2.equals(node));
+        Assertions.assertTrue(node2.equals(node));
         assertNotEquals(true, node3.equals(node2));
     }
 
@@ -187,8 +184,8 @@ public class LinkedListTabulatedFunctionTest {
         double[] yVal2 = {5, 6, 7, 8};
         LinkedListTabulatedFunction list2 = new LinkedListTabulatedFunction(xVal2, yVal2);
 
-        Assertions.assertTrue(list.equals(list1));
-        Assertions.assertFalse(list.equals(list2));
+        Assertions.assertEquals(list, list1);
+        assertNotEquals(list, list2);
     }
 
     @Test
@@ -232,7 +229,7 @@ public class LinkedListTabulatedFunctionTest {
     }
 
     @Test
-    public void toString2Test(){
+    public void toString2Test() {
         Assertions.assertEquals(list.toString(), "LinkedListTabulatedFunction size = 4\n[1.0; 5.0]\n[2.0; 6.0]\n[3.0; 7.0]\n[4.0; 8.0]\n");
     }
 }

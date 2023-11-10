@@ -47,7 +47,7 @@ public final class FunctionsIO {
     public static void writeTabulatedFunction(BufferedOutputStream outputStream, TabulatedFunction function) throws IOException {
         DataOutputStream out = new DataOutputStream(outputStream);
         out.writeInt(function.getCount());
-        for(Point point : function){
+        for (Point point : function) {
             out.writeDouble(point.x);
             out.writeDouble(point.y);
         }
@@ -57,9 +57,9 @@ public final class FunctionsIO {
     public static TabulatedFunction readTabulatedFunction(BufferedInputStream inputStream, TabulatedFunctionFactory factory) throws IOException {
         DataInputStream in = new DataInputStream(inputStream);
         int count = in.readInt();
-        double [] xValues = new double[count];
-        double [] yValues = new double[count];
-        for(int index=0; index!=count;index++){
+        double[] xValues = new double[count];
+        double[] yValues = new double[count];
+        for (int index = 0; index != count; index++) {
             xValues[index] = in.readDouble();
             yValues[index] = in.readDouble();
         }

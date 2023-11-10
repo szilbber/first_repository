@@ -5,7 +5,6 @@ import functions.LinkedListTabulatedFunction;
 import functions.TabulatedFunction;
 import functions.factory.LinkedListTabulatedFunctionFactory;
 import org.junit.Test;
-
 import org.junit.jupiter.api.Assertions;
 
 public class TabulatedDifferentialOperatorTest {
@@ -15,6 +14,7 @@ public class TabulatedDifferentialOperatorTest {
     double[] xValue = {1, 2, 3, 4, 5};
     double[] yValue = {2, 4, 6, 8, 10};
     ArrayTabulatedFunction arr = new ArrayTabulatedFunction(xValue, yValue);
+
     @Test
     public void setFactoryTest() {
         LinkedListTabulatedFunctionFactory fact = new LinkedListTabulatedFunctionFactory();
@@ -22,8 +22,9 @@ public class TabulatedDifferentialOperatorTest {
         operation.setFactory(fact);
         Assertions.assertEquals(operation.getFactory().getClass(), fact.getClass());
     }
+
     @Test
-    public void deriveTest1(){
+    public void deriveTest1() {
         LinkedListTabulatedFunctionFactory fact = new LinkedListTabulatedFunctionFactory();
         TabulatedDifferentialOperator operation = new TabulatedDifferentialOperator(fact);
         TabulatedFunction function = operation.derive(list);
@@ -32,8 +33,9 @@ public class TabulatedDifferentialOperatorTest {
         Assertions.assertEquals(1, function.getY(2));
         Assertions.assertEquals(1, function.getY(3));
     }
+
     @Test
-    public void deriveTest2(){
+    public void deriveTest2() {
         LinkedListTabulatedFunctionFactory fact = new LinkedListTabulatedFunctionFactory();
         TabulatedDifferentialOperator operation = new TabulatedDifferentialOperator(fact);
         TabulatedFunction function = operation.derive(arr);

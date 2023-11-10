@@ -1,11 +1,12 @@
 package functions;
 
-import org.junit.Test;
 import junit.framework.Assert;
+import org.junit.Test;
 
 
 public class ZeroFunctionTest {
     MathFunction testFunc = new ZeroFunction();
+
     @Test
     public void testApply() {
         Assert.assertEquals(0.0, testFunc.apply(0));

@@ -1,4 +1,5 @@
 package functions.factory;
+
 import functions.TabulatedFunction;
 
 public interface TabulatedFunctionFactory {

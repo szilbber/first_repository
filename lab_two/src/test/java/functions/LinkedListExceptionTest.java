@@ -57,7 +57,7 @@ public class LinkedListExceptionTest {
     public void constructorExceptionTest() {
         double[] xValIncorrect = {1, 2, 5, 3};
         double[] yValIncorrect = {5, 6, 7, 8, 9};
-        Assertions.assertThrows(ArrayIsNotSortedException.class, ()  -> new LinkedListTabulatedFunction(xValIncorrect, yVal) );
-        Assertions.assertThrows(DifferentLengthOfArraysException.class, () -> new LinkedListTabulatedFunction(xVal, yValIncorrect) );
+        Assertions.assertThrows(ArrayIsNotSortedException.class, () -> new LinkedListTabulatedFunction(xValIncorrect, yVal));
+        Assertions.assertThrows(DifferentLengthOfArraysException.class, () -> new LinkedListTabulatedFunction(xVal, yValIncorrect));
     }
 }

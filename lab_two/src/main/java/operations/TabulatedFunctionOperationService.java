@@ -38,7 +38,7 @@ public class TabulatedFunctionOperationService {
         this.factory = factory;
     }
 
-    private interface BiOperation{
+    private interface BiOperation {
         double apply(double u, double v);
     }
 
@@ -77,6 +77,7 @@ public class TabulatedFunctionOperationService {
     public TabulatedFunction multiplication(TabulatedFunction a, TabulatedFunction b) {
         return doOperation(a, b, (x, y) -> x * y);
     }
+
     public TabulatedFunction division(TabulatedFunction a, TabulatedFunction b) {
         return doOperation(a, b, (x, y) -> x / y);
     }

@@ -5,8 +5,9 @@ import junit.framework.TestCase;
 public class ConstantFunctionTest extends TestCase {
 
     ConstantFunction PI = new ConstantFunction(3.14);
-    ConstantFunction Zero =  new ZeroFunction();
+    ConstantFunction Zero = new ZeroFunction();
     ConstantFunction Unit = new UnitFunctions();
+
     public void testGetConstNumber() {
         assertEquals(3.14, PI.getConstant());
         assertEquals(0., Zero.getConstant());

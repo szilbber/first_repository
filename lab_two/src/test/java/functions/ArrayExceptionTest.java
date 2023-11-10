@@ -1,4 +1,5 @@
 package functions;
+
 import exceptions.ArrayIsNotSortedException;
 import exceptions.DifferentLengthOfArraysException;
 import org.junit.Test;
@@ -9,6 +10,7 @@ public class ArrayExceptionTest {
     double[] yVal = {1, 2, 3, 4};
 
     ArrayTabulatedFunction array = new ArrayTabulatedFunction(xVal, yVal);
+
     @Test
     public void constructorExceptionTest() {
         double[] xVal1 = {1, 2, 3, 4};
@@ -20,6 +22,7 @@ public class ArrayExceptionTest {
         Assertions.assertThrows(ArrayIsNotSortedException.class, () -> new ArrayTabulatedFunction(xValIncorrect, yVal1));
         Assertions.assertThrows(DifferentLengthOfArraysException.class, () -> new ArrayTabulatedFunction(xVal1, yValIncorrect));
     }
+
     @Test(expected = IllegalArgumentException.class)
     public void createArrayOne() {
         double[] x_one = {3};
@@ -32,6 +35,7 @@ public class ArrayExceptionTest {
         MathFunction sqrFunctions = new SqrFunctions();
         ArrayTabulatedFunction arrTwo = new ArrayTabulatedFunction(sqrFunctions, 0, 100, 1);
     }
+
     @Test
     public void getXExceptionTest() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> array.getX(10));

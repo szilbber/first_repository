@@ -1,11 +1,10 @@
 package functions;
 
-import java.awt.*;
 import java.util.Iterator;
 
 public class MockTabulatedFunction extends AbstractTabulatedFunction {
-    private double[] xValue;
-    private double[] yValue;
+    private final double[] xValue;
+    private final double[] yValue;
 
     public MockTabulatedFunction() {
         xValue = new double[]{0, 1};

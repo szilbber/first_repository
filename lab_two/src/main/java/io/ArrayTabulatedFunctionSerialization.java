@@ -2,7 +2,6 @@ package io;
 
 import functions.ArrayTabulatedFunction;
 import functions.TabulatedFunction;
-import operations.LeftSteppingDifferentialOperator;
 import operations.TabulatedDifferentialOperator;
 
 import java.io.*;

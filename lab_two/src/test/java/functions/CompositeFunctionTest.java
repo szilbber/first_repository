@@ -1,7 +1,7 @@
 package functions;
 
-import org.junit.Test;
 import junit.framework.Assert;
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 public class CompositeFunctionTest {
@@ -23,8 +23,8 @@ public class CompositeFunctionTest {
     MathFunction expLogSqrFunc = new ExponentialLogFunction(2, 2).andThen(tabulateSqrFunction);
 
     //Тесты для X
-    double[] xVal = {1,2,3,4};
-    double[] yVal = {5,6,7,8};
+    double[] xVal = {1, 2, 3, 4};
+    double[] yVal = {5, 6, 7, 8};
     MathFunction myTestFunction = new LinkedListTabulatedFunction(xVal, yVal);
     MathFunction unitFunctions = new UnitFunctions();
     MathFunction asinSinFunction = new AsinSinFunction();
@@ -32,9 +32,8 @@ public class CompositeFunctionTest {
     MathFunction asinSinMy = asinSinFunction.andThen(myTestFunction);
 
 
-
     @Test
-    public void AndThanList(){
+    public void AndThanList() {
         Assertions.assertEquals(1, unitMy.apply(1));
         Assertions.assertEquals(0.716815, asinSinMy.apply(3), 0.000_001);
     }

@@ -1,10 +1,8 @@
 package io;
 
-import functions.ArrayTabulatedFunction;
 import functions.TabulatedFunction;
 import functions.factory.ArrayTabulatedFunctionFactory;
 import functions.factory.LinkedListTabulatedFunctionFactory;
-import functions.factory.TabulatedFunctionFactory;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

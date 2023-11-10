@@ -4,7 +4,7 @@ import functions.MathFunction;
 import functions.SqrFunctions;
 import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SteppingDifferentialOperatorTest {
     @Test

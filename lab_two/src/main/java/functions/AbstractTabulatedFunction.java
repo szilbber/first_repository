@@ -43,8 +43,6 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction, Se
             throw new DifferentLengthOfArraysException("The lengths of the xValues and yValues arrays are different");
     }
 
-    ;
-
     static void checkSorted(double[] xValues) {
         for (int i = 1; i < xValues.length; i++)
             if (xValues[i - 1] > xValues[i])

@@ -1,8 +1,6 @@
 package functions;
 
 import junit.framework.TestCase;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 import java.util.Iterator;
 
@@ -89,12 +87,12 @@ public class ArrayTabulatedFunctionTest extends TestCase {
         assertEquals(100., objSqrFunctionTest.rightBound(), 0.1);
     }
 
-//    public void testToString() {
+    //    public void testToString() {
 //        String expectedString = "ArrayTabulatedFunction{xValues=[1.0, 2.0, 3.0, 4.0, 5.0], yValues=[2.0, 4.0, 6.0, 8.0, 10.0]}";
 //        assertEquals(expectedString, objTest.toString());
 //    }
     public void test2ToString() {
-        Assertions.assertEquals(objTest.toString(), "ArrayTabulatedFunction size = 5\n[1.0; 2.0]\n[2.0; 4.0]\n[3.0; 6.0]\n[4.0; 8.0]\n[5.0; 10.0]\n" );
+        assertEquals(objTest.toString(), "ArrayTabulatedFunction size = 5\n[1.0; 2.0]\n[2.0; 4.0]\n[3.0; 6.0]\n[4.0; 8.0]\n[5.0; 10.0]\n");
     }
 
     public void testHashCode() {

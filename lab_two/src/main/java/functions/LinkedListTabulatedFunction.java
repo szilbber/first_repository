@@ -13,11 +13,13 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     @Serial
     private static final long serialVersionUID = 324484052879874044L;
+
     @Override
     public Iterator<Point> iterator() throws UnsupportedOperationException {
         //throw new UnsupportedOperationException();
         return new Iterator<Point>() {
             Node node = head;
+
             @Override
             public boolean hasNext() {
                 return node != null;
@@ -35,6 +37,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
             }
         };
     }
+
     static class Node implements Serializable {
         public Node next;
         public Node prev;
@@ -49,7 +52,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         @Override
         public String toString() {
             return "(" +
-                    + x + ", "
+                    +x + ", "
                     + y +
                     ')';
         }
@@ -69,7 +72,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
         @Override
         protected Object clone() throws CloneNotSupportedException {
-            Node cloneNode = new Node(x,y);
+            Node cloneNode = new Node(x, y);
             cloneNode.prev = this.prev;
             cloneNode.next = this.next;
             return cloneNode;
@@ -157,7 +160,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
                 break;
             } else {
                 allXsmaller = false;
-                index_floor = index_temp-1;
+                index_floor = index_temp - 1;
                 break;
             }
         }
@@ -165,24 +168,24 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         return index_floor;
     }
 
-    protected double extrapolateLeft(double x)throws IllegalArgumentException {
+    protected double extrapolateLeft(double x) throws IllegalArgumentException {
 
-            double leftY = getY(0);
-            double leftX = getX(0);
-            double rightY = getY(1);
-            double rightX = getX(1);
-            return interpolate(x, leftX, rightX, leftY, rightY);
+        double leftY = getY(0);
+        double leftX = getX(0);
+        double rightY = getY(1);
+        double rightX = getX(1);
+        return interpolate(x, leftX, rightX, leftY, rightY);
 
     }
 
 
     protected double extrapolateRight(double x) {
 
-            double leftY = head.prev.prev.y;
-            double leftX = head.prev.prev.x;
-            double rightY = head.prev.y;
-            double rightX = rightBound();
-            return interpolate(x, leftX, rightX, leftY, rightY);
+        double leftY = head.prev.prev.y;
+        double leftX = head.prev.prev.x;
+        double rightY = head.prev.y;
+        double rightX = rightBound();
+        return interpolate(x, leftX, rightX, leftY, rightY);
 
     }
 
@@ -192,10 +195,10 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
             throw new InterpolationException("Range error for interpolation");
 
         double leftY = getY(floorIndex);
-            double leftX = getX(floorIndex);
-            double rightY = getY(floorIndex + 1);
-            double rightX = getX(floorIndex + 1);
-            return interpolate(x, leftX, rightX, leftY, rightY);
+        double leftX = getX(floorIndex);
+        double rightY = getY(floorIndex + 1);
+        double rightX = getX(floorIndex + 1);
+        return interpolate(x, leftX, rightX, leftY, rightY);
 
     }
 
@@ -367,19 +370,19 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
         LinkedListTabulatedFunction that = (LinkedListTabulatedFunction) o;
         boolean flag = true;
-        for(int i = 0; i!=count; i++ ){
-            if((this.getNode(i).x != that.getNode(i).x) || (this.getNode(i).y != that.getNode(i).y)){
+        for (int i = 0; i != count; i++) {
+            if ((this.getNode(i).x != that.getNode(i).x) || (this.getNode(i).y != that.getNode(i).y)) {
                 flag = false;
                 break;
             }
         }
-        return ((getClass() == that.getClass()) && (flag==true));
+        return ((getClass() == that.getClass()) && (flag));
     }
 
     @Override
     public int hashCode() {
         int result = 31;
-        for(int i = 0; i!=count; i++){
+        for (int i = 0; i != count; i++) {
             result = result * 31 + this.getNode(i).hashCode();
         }
         return result;

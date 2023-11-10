@@ -1,7 +1,7 @@
 package functions;
 
-import org.junit.Test;
 import junit.framework.Assert;
+import org.junit.Test;
 
 public class IdentityFunctionTest {
     IdentityFunction objOne = new IdentityFunction();
@@ -15,17 +15,17 @@ public class IdentityFunctionTest {
     }
 
     @Test
-    public void testToString(){
+    public void testToString() {
         Assert.assertEquals("IdentityFunction(x) ", objOne.toString());
     }
 
     @Test
-    public void testEquals(){
+    public void testEquals() {
         MathFunction identFunctionToMathInterface = new IdentityFunction();
         MathFunction constFunc = new ConstantFunction(15);
-        Assert.assertEquals(true, objOne.equals(objTwo));
-        Assert.assertEquals(true, objOne.equals(identFunctionToMathInterface));
-        Assert.assertEquals(false, objOne.equals(constFunc));
+        Assert.assertTrue(objOne.equals(objTwo));
+        Assert.assertTrue(objOne.equals(identFunctionToMathInterface));
+        Assert.assertFalse(objOne.equals(constFunc));
     }
 
     @Test

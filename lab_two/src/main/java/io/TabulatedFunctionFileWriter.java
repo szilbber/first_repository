@@ -3,10 +3,13 @@ package io;
 import functions.ArrayTabulatedFunction;
 import functions.LinkedListTabulatedFunction;
 import functions.TabulatedFunction;
-import java.io.*;
 
-public class TabulatedFunctionFileWriter{
-    public static void main(String[] args){
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class TabulatedFunctionFileWriter {
+    public static void main(String[] args) {
         try {
             try (BufferedWriter arrayWriter = new BufferedWriter(new FileWriter("output/array function.txt"));
                  BufferedWriter linkedListWriter = new BufferedWriter(new FileWriter("output/linked list function.txt"))) {
