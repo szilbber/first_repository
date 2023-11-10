@@ -19,7 +19,6 @@ public class LinkedListTabulatedFunctionSerialization {
             TabulatedDifferentialOperator operator = new TabulatedDifferentialOperator(factory);
             TabulatedFunction derivativeFirst = operator.derive(function);
             TabulatedFunction derivativeSecond = operator.derive(derivativeFirst);
-
             FunctionsIO.serialize(out, function);
             FunctionsIO.serialize(out, derivativeFirst);
             FunctionsIO.serialize(out, derivativeSecond);
