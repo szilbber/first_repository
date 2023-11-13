@@ -9,11 +9,10 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Serializable {
-    private final double[] xValues;
-    private final double[] yValues;
-
     @Serial
     private static final long serialVersionUID = 1L;
+    private final double[] xValues;
+    private final double[] yValues;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues) {
         checkLengthIsTheSame(xValues, yValues);
@@ -27,7 +26,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         count = xValues.length;
     }
 
-    ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
+    public ArrayTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
         if (count < 2) throw new IllegalArgumentException("Длина меньше минимальной");
         if (xFrom > xTo) {
             double temp = xFrom;
@@ -39,7 +38,7 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         yValues = new double[count];
         this.count = count;
 
-        double step = (xFrom + xTo) / (count - 1);
+        double step = (Math.abs(xFrom) + Math.abs(xTo)) / (count - 1);
         double xCoordinate = xFrom;
 
         for (int i = 0; i < count; i++) {
@@ -146,14 +145,6 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         result = 31 * result + Arrays.hashCode(yValues);
         return result;
     }
-
-//    @Override
-//    public String toString() {
-//        return "ArrayTabulatedFunction{" +
-//                "xValues=" + Arrays.toString(xValues) +
-//                ", yValues=" + Arrays.toString(yValues) +
-//                '}';
-//    }
 
     @Override
     public ArrayTabulatedFunction clone() {

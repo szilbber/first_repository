@@ -13,98 +13,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     @Serial
     private static final long serialVersionUID = 324484052879874044L;
-
-    @Override
-    public Iterator<Point> iterator() throws UnsupportedOperationException {
-        //throw new UnsupportedOperationException();
-        return new Iterator<Point>() {
-            Node node = head;
-
-            @Override
-            public boolean hasNext() {
-                return node != null;
-            }
-
-            @Override
-            public Point next() {
-                Point p;
-                if (hasNext()) {
-                    p = new Point(node.x, node.y);
-                    if (node.next == head) node = null;
-                    else node = node.next;
-                } else throw new NoSuchElementException();
-                return p;
-            }
-        };
-    }
-
-    static class Node implements Serializable {
-        public Node next;
-        public Node prev;
-        public double x;
-        public double y;
-
-        Node(double x, double y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        @Override
-        public String toString() {
-            return "(" +
-                    +x + ", "
-                    + y +
-                    ')';
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if ((this == o)) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Node node = (Node) o;
-            return Double.compare(x, node.x) == 0 && Double.compare(y, node.y) == 0 && Objects.equals(next, node.next) && Objects.equals(prev, node.prev);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(x, y);
-        }
-
-        @Override
-        protected Object clone() throws CloneNotSupportedException {
-            Node cloneNode = new Node(x, y);
-            cloneNode.prev = this.prev;
-            cloneNode.next = this.next;
-            return cloneNode;
-        }
-    }
-
     private Node head;
-
-    private Node getNode(int index) {
-        if (index < 0 || index >= count) {
-            throw new IllegalArgumentException("Некорректный индекс: " + index);
-        }
-        Node i = head;
-        for (int index_temp = 0; index_temp != index; i = i.next, index_temp++) ;
-        return i;
-    }
-
-    private void addNode(double x, double y) {
-        Node newNode = new Node(x, y);
-        if (head == null) {
-            head = newNode;
-            newNode.prev = newNode;
-            newNode.next = newNode;
-        } else {
-            Node last = head.prev;
-            last.next = newNode;
-            head.prev = newNode;
-            newNode.prev = last;
-            newNode.next = head;
-        }
-        count++;
-    }
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues) {
         checkLengthIsTheSame(xValues, yValues);
@@ -143,6 +52,55 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         head.prev.x = xTo;
     }
 
+    @Override
+    public Iterator<Point> iterator() throws UnsupportedOperationException {
+        //throw new UnsupportedOperationException();
+        return new Iterator<Point>() {
+            Node node = head;
+
+            @Override
+            public boolean hasNext() {
+                return node != null;
+            }
+
+            @Override
+            public Point next() {
+                Point p;
+                if (hasNext()) {
+                    p = new Point(node.x, node.y);
+                    if (node.next == head) node = null;
+                    else node = node.next;
+                } else throw new NoSuchElementException();
+                return p;
+            }
+        };
+    }
+
+    private Node getNode(int index) {
+        if (index < 0 || index >= count) {
+            throw new IllegalArgumentException("Некорректный индекс: " + index);
+        }
+        Node i = head;
+        for (int index_temp = 0; index_temp != index; i = i.next, index_temp++) ;
+        return i;
+    }
+
+    private void addNode(double x, double y) {
+        Node newNode = new Node(x, y);
+        if (head == null) {
+            head = newNode;
+            newNode.prev = newNode;
+            newNode.next = newNode;
+        } else {
+            Node last = head.prev;
+            last.next = newNode;
+            head.prev = newNode;
+            newNode.prev = last;
+            newNode.next = head;
+        }
+        count++;
+    }
+
     protected int floorIndexOfX(double x) {
         if (x < head.x) throw new IllegalArgumentException("х меньше левой границы");
         int index_floor = 0;
@@ -178,7 +136,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     }
 
-
     protected double extrapolateRight(double x) {
 
         double leftY = head.prev.prev.y;
@@ -188,7 +145,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         return interpolate(x, leftX, rightX, leftY, rightY);
 
     }
-
 
     protected double interpolate(double x, int floorIndex) {
         if (getX(floorIndex) >= x)
@@ -207,14 +163,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         return count;
     }
 
-
     public double getX(int index) {
         if (index < 0 || index >= count) {
             throw new IllegalArgumentException("Некорректный индекс: " + index);
         }
         return getNode(index).x;
     }
-
 
     public double getY(int index) {
         if (index < 0 || index >= count) {
@@ -223,14 +177,12 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         return getNode(index).y;
     }
 
-
     public void setY(int index, double value) {
         if (index < 0 || index >= count) {
             throw new IllegalArgumentException("Некорректный индекс: " + index);
         }
         getNode(index).y = value;
     }
-
 
     public int indexOfX(double x) {
         int index = 0;
@@ -355,16 +307,6 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         count--;
     }
 
-//    @Override
-//    public String toString() {
-//
-//        String stringArray = "";
-//        for(int i = 0; i!=count; i++ ){
-//            stringArray += ("(" + getX(i) + ";" + getY(i) + ") ");
-//        }
-//        return stringArray;
-//    }
-
     @Override
     public boolean equals(Object o) {
 
@@ -397,5 +339,46 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
             yCloneValues[i] = this.getY(i);
         }
         return new LinkedListTabulatedFunction(xCloneValues, yCloneValues);
+    }
+
+    static class Node implements Serializable {
+        public Node next;
+        public Node prev;
+        public double x;
+        public double y;
+
+        Node(double x, double y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        @Override
+        public String toString() {
+            return "(" +
+                    +x + ", "
+                    + y +
+                    ')';
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if ((this == o)) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Node node = (Node) o;
+            return Double.compare(x, node.x) == 0 && Double.compare(y, node.y) == 0 && Objects.equals(next, node.next) && Objects.equals(prev, node.prev);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(x, y);
+        }
+
+        @Override
+        protected Object clone() throws CloneNotSupportedException {
+            Node cloneNode = new Node(x, y);
+            cloneNode.prev = this.prev;
+            cloneNode.next = this.next;
+            return cloneNode;
+        }
     }
 }

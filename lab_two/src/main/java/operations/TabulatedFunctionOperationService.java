@@ -38,10 +38,6 @@ public class TabulatedFunctionOperationService {
         this.factory = factory;
     }
 
-    private interface BiOperation {
-        double apply(double u, double v);
-    }
-
     private TabulatedFunction doOperation(TabulatedFunction a, TabulatedFunction b, BiOperation operation) {
         int sizeA = a.getCount();
         int sizeB = b.getCount();
@@ -80,5 +76,9 @@ public class TabulatedFunctionOperationService {
 
     public TabulatedFunction division(TabulatedFunction a, TabulatedFunction b) {
         return doOperation(a, b, (x, y) -> x / y);
+    }
+
+    private interface BiOperation {
+        double apply(double u, double v);
     }
 }

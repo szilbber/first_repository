@@ -1,12 +1,9 @@
 package concurrent;
 
-import functions.LinkedListTabulatedFunction;
 import functions.Point;
 import functions.TabulatedFunction;
-import operations.TabulatedFunctionOperationService;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 public class SynchronizedTabulatedFunction implements TabulatedFunction {
     private final TabulatedFunction delegate;
@@ -73,26 +70,7 @@ public class SynchronizedTabulatedFunction implements TabulatedFunction {
 
     @Override
     public Iterator<Point> iterator() {
-//        synchronized (delegate) {
-//            Point[] copyFunction = TabulatedFunctionOperationService.asPoints(delegate);
-//            return new Iterator<Point>() {
-//                int i = 0;
-//                @Override
-//                public boolean hasNext() {
-//                    return i<delegate.getCount();
-//                }
-//
-//                @Override
-//                public Point next() {
-//                    Point p;
-//                    if (hasNext()) {
-//                        p = new Point(copyFunction[i++].x, copyFunction[i++].y);
-//                    } else throw new NoSuchElementException();
-//                    return p;
-//                }
-//            };
-   //     }
-        return null;
+        return delegate.iterator();
     }
 
     @Override
@@ -100,5 +78,15 @@ public class SynchronizedTabulatedFunction implements TabulatedFunction {
         synchronized (delegate) {
             return delegate.apply(x);
         }
+    }
+
+    public <T> T doSynchronously(Operation<T> operation) {
+        synchronized (delegate) {
+            return operation.apply(this);
+        }
+    }
+
+    public interface Operation<T> {
+        T apply(SynchronizedTabulatedFunction synchronizedTabulatedFunction);
     }
 }
