@@ -20,6 +20,5 @@ public class WriteTask implements Runnable {
                 System.out.println(str);
             }
         }
-
     }
 }
