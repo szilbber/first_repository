@@ -16,21 +16,20 @@ public class CompositeFunctionTest {
             new double[]{1, 1.5, 2, 2.5, 3, 3.5, 4},
             new double[]{2, 3, 4, 5, 6, 7, 8});
     MathFunction tabulateSqrFunction = new ArrayTabulatedFunction(sqrFunc, 0, 10, 100);
-
-    MathFunction sqrSinFunc = sqrFunc.andThen(sinFunc);
-    MathFunction sqrZeroFunc = sqrFunc.andThen(zeroFunc);
     MathFunction mulSqrFunc = tableMultiplyContFunc.andThen(tabulateSqrFunction);
     MathFunction expLogSqrFunc = new ExponentialLogFunction(2, 2).andThen(tabulateSqrFunction);
-
+    MathFunction sqrSinFunc = sqrFunc.andThen(sinFunc);
+    MathFunction sqrZeroFunc = sqrFunc.andThen(zeroFunc);
     //Тесты для X
     double[] xVal = {1, 2, 3, 4};
     double[] yVal = {5, 6, 7, 8};
     MathFunction myTestFunction = new LinkedListTabulatedFunction(xVal, yVal);
+
     MathFunction unitFunctions = new UnitFunctions();
     MathFunction asinSinFunction = new AsinSinFunction();
+
     MathFunction unitMy = unitFunctions.andThen(myTestFunction);
     MathFunction asinSinMy = asinSinFunction.andThen(myTestFunction);
-
 
     @Test
     public void AndThanList() {

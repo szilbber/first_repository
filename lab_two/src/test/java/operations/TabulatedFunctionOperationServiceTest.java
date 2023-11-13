@@ -15,6 +15,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TabulatedFunctionOperationServiceTest {
 
+    double[] xVal = {1, 2, 3, 4};
+    double[] yVal = {5, 6, 7, 8};
+    LinkedListTabulatedFunction list = new LinkedListTabulatedFunction(xVal, yVal);
+    double[] xVal1 = {1, 2, 3, 4};
+    double[] yVal1 = {13, 14, 15, 16};
+    LinkedListTabulatedFunction list1 = new LinkedListTabulatedFunction(xVal1, yVal1);
+    TabulatedFunctionOperationService operation = new TabulatedFunctionOperationService();
+
     @Test
     void asPoint() {
         double[] xValues = {1.0, 2.0, 3.0};
@@ -28,14 +36,6 @@ class TabulatedFunctionOperationServiceTest {
             assertEquals(yValues[i], points[i].y, 0.0001);
         }
     }
-
-    double[] xVal = {1, 2, 3, 4};
-    double[] yVal = {5, 6, 7, 8};
-    LinkedListTabulatedFunction list = new LinkedListTabulatedFunction(xVal, yVal);
-    double[] xVal1 = {1, 2, 3, 4};
-    double[] yVal1 = {13, 14, 15, 16};
-    LinkedListTabulatedFunction list1 = new LinkedListTabulatedFunction(xVal1, yVal1);
-    TabulatedFunctionOperationService operation = new TabulatedFunctionOperationService();
 
     @Test
     public void addTest() {
