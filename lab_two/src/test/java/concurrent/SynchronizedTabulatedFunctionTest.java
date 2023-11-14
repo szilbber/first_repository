@@ -1,10 +1,10 @@
 package concurrent;
 
-import functions.ArrayTabulatedFunction;
-import functions.IdentityFunction;
-import functions.Point;
-import functions.TabulatedFunction;
+import functions.*;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+
+import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -80,5 +80,21 @@ public class SynchronizedTabulatedFunctionTest {
         };
         double sumOfY = synchronizedTabulatedFunction.doSynchronously(operation);
         assertEquals(0, sumOfY);
+    }
+
+    @Test
+    public void iteratorTest1() {
+        double[] xVal = {1, 2, 3, 4};
+        double[] yVal = {5, 6, 7, 8};
+        LinkedListTabulatedFunction list = new LinkedListTabulatedFunction(xVal, yVal);
+        SynchronizedTabulatedFunction listSinch = new SynchronizedTabulatedFunction(list);
+        Iterator<Point> iterator = listSinch.iterator();
+        int index = 0;
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            Assertions.assertEquals(point.x, list.getX(index));
+            Assertions.assertEquals(point.y, list.getY(index));
+            index++;
+        }
     }
 }
