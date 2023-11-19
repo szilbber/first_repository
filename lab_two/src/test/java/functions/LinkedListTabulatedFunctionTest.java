@@ -152,7 +152,7 @@ public class LinkedListTabulatedFunctionTest {
         LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(3, 4);
         LinkedListTabulatedFunction.Node node2 = new LinkedListTabulatedFunction.Node(3, 4);
         LinkedListTabulatedFunction.Node node3 = new LinkedListTabulatedFunction.Node(3, 7);
-        Assertions.assertTrue(node2.equals(node));
+        Assertions.assertEquals(node2, node);
         assertNotEquals(true, node3.equals(node2));
     }
 
@@ -168,11 +168,6 @@ public class LinkedListTabulatedFunctionTest {
         LinkedListTabulatedFunction.Node node = new LinkedListTabulatedFunction.Node(3, 4);
         Assertions.assertEquals(node, node.clone());
     }
-
-//    @Test
-//    public void toStringTest() {
-//        Assertions.assertEquals("(1.0;5.0) (2.0;6.0) (3.0;7.0) (4.0;8.0) ", list.toString());
-//    }
 
     @Test
     public void equalsTest() {

@@ -24,12 +24,8 @@ public class CompositeFunctionTest {
     double[] xVal = {1, 2, 3, 4};
     double[] yVal = {5, 6, 7, 8};
     MathFunction myTestFunction = new LinkedListTabulatedFunction(xVal, yVal);
-
-    MathFunction unitFunctions = new UnitFunctions();
-    MathFunction asinSinFunction = new AsinSinFunction();
-
-    MathFunction unitMy = unitFunctions.andThen(myTestFunction);
-    MathFunction asinSinMy = asinSinFunction.andThen(myTestFunction);
+    MathFunction unitMy = new UnitFunctions().andThen(myTestFunction);
+    MathFunction asinSinMy = new AsinSinFunction().andThen(myTestFunction);
 
     @Test
     public void AndThanList() {

@@ -3,6 +3,8 @@ package functions;
 import junit.framework.Assert;
 import org.junit.Test;
 
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
 public class IdentityFunctionTest {
     IdentityFunction objOne = new IdentityFunction();
     IdentityFunction objTwo = (IdentityFunction) objOne.clone();
@@ -23,9 +25,9 @@ public class IdentityFunctionTest {
     public void testEquals() {
         MathFunction identFunctionToMathInterface = new IdentityFunction();
         MathFunction constFunc = new ConstantFunction(15);
-        Assert.assertTrue(objOne.equals(objTwo));
-        Assert.assertTrue(objOne.equals(identFunctionToMathInterface));
-        Assert.assertFalse(objOne.equals(constFunc));
+        Assert.assertEquals(objOne, objTwo);
+        Assert.assertEquals(objOne, identFunctionToMathInterface);
+        assertNotEquals(objOne, constFunc);
     }
 
     @Test
